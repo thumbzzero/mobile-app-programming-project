@@ -35,16 +35,15 @@ class MoreFragment : Fragment() {
 
         TabLayoutMediator(binding.tabLayout,binding.viewpager){tab,position->
             when(position){
-                0-> tab.text="탭1"
-                1-> tab.text="탭2"
+                0-> tab.text="공지사항"
+                1-> tab.text="주간 Knu"
             }
         }.attach()
 
-        binding.settingBtn.setOnClickListener {
+        binding.myPageImg.setOnClickListener {
             Log.d("test","액티비티 호출")
-            val intent =Intent(requireContext(), SettingActivity::class.java)
+            val intent =Intent(requireContext(), MypageActivity::class.java)
             startActivity(intent)
-            //(activity as MainActivity).overridePendingTransition(R.anim.none,R.anim.vertical_enter)
         }
 
 

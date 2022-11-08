@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".common.SettingActivity">
+    tools:context=".common.MypageActivity">
 
     <ImageView
         android:id="@+id/backBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_margin="10dp"
         app:srcCompat="@drawable/back_icon" />
 </LinearLayout>

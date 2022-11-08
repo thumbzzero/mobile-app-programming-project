@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".common.MoreFragment">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -15,27 +17,24 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="wrap_content"
-            android:layout_gravity="start"
             android:layout_height="match_parent" />
 
         <View
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/settingBtn"
-            android:layout_gravity="end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/btn_star_big_on" />
+        <ImageView
+            android:id="@+id/myPageImg"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/mypage_img_temp" />
 
     </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"/>
 
 </LinearLayout>

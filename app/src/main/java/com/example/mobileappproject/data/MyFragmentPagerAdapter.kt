@@ -10,7 +10,7 @@ import com.example.mobileappproject.common.MoreWeekFragment
 class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity) {
     val fragments: List<Fragment>
     init {
-        fragments= listOf(MoreWeekFragment(), MoreNoticeFragment())
+        fragments= listOf( MoreNoticeFragment(),MoreWeekFragment())
         Log.d("test","Fragments size:${fragments.size}")
     }
 

@@ -11,7 +11,7 @@ import com.example.mobileappproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var fragment1: LmsMainFragment
-    lateinit var fragment4: MoreFragment
+    lateinit var fragment5: MoreFragment
     lateinit var fragmentManger:FragmentManager
 
     val initPageIndex:Int=1//처음 프래그먼트
@@ -49,6 +49,11 @@ class MainActivity : AppCompatActivity() {
                     Log.d("test", "4번 메뉴선택됨")
                     true
                 }
+                R.id.navigation_menu5 -> {
+                    changeFragment(5,true)
+                    Log.d("test", "5번 메뉴선택됨")
+                    true
+                }
             }
             false
         }
@@ -57,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         if(!backBtnList.contains(index) && change) backBtnList.add(index)
 
         if(!::fragment1.isInitialized) fragment1 = LmsMainFragment()
-        if(!::fragment4.isInitialized) fragment4 = MoreFragment()
+        if(!::fragment5.isInitialized) fragment5 = MoreFragment()
         val transaction: FragmentTransaction = fragmentManger.beginTransaction()
         when(index){
             1->{
@@ -70,7 +75,10 @@ class MainActivity : AppCompatActivity() {
 
             }
             4->{
-                transaction.replace(R.id.fragment_container,fragment4).commit()
+
+            }
+            5->{
+                transaction.replace(R.id.fragment_container,fragment5).commit()
             }
         }
     }

@@ -4,13 +4,13 @@ package com.example.mobileappproject.common
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mobileappproject.R
-import com.example.mobileappproject.databinding.ActivitySettingBinding
+import com.example.mobileappproject.databinding.ActivityMypageBinding
 
-class SettingActivity : AppCompatActivity() {
+class MypageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivitySettingBinding.inflate(layoutInflater)
+        val binding = ActivityMypageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         overridePendingTransition(R.anim.right_enter, R.anim.none)
 
@@ -21,5 +21,12 @@ class SettingActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(isFinishing){
+            overridePendingTransition(R.anim.none,R.anim.right_exit)
+        }
     }
 }

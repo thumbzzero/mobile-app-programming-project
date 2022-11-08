@@ -3,20 +3,24 @@
     <item
         android:id="@+id/navigation_menu1"
         android:icon="@android:drawable/btn_star"
-        android:title="lms 메뉴1" />
+        android:title="대시보드" />
 
     <item
         android:id="@+id/navigation_menu2"
         android:icon="@android:drawable/btn_star"
-        android:title="lms 메뉴2" />
+        android:title="캘린더" />
 
     <item
         android:id="@+id/navigation_menu3"
         android:icon="@android:drawable/btn_star"
-        android:title="lms 메뉴3" />
-
+        android:title="알림" />
     <item
         android:id="@+id/navigation_menu4"
+        android:icon="@android:drawable/btn_star"
+        android:title="메시지" />
+
+    <item
+        android:id="@+id/navigation_menu5"
         android:icon="@android:drawable/btn_star"
         android:title="더보기" />
 
