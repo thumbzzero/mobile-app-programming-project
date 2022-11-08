@@ -1,10 +1,9 @@
-package com.example.mobileappproject
+package com.example.mobileappproject.common
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.FragmentTransaction
+import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivitySettingBinding
 
 class SettingActivity : AppCompatActivity() {
@@ -13,7 +12,7 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        overridePendingTransition(R.anim.right_enter,R.anim.none)
+        overridePendingTransition(R.anim.right_enter, R.anim.none)
 
 
         binding.backBtn.setOnClickListener{

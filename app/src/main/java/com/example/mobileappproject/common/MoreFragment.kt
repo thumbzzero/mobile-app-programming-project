@@ -1,6 +1,5 @@
-package com.example.mobileappproject
+package com.example.mobileappproject.common
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
+import com.example.mobileappproject.data.MyFragmentPagerAdapter
 import com.example.mobileappproject.databinding.FragmentMoreBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -42,7 +42,7 @@ class MoreFragment : Fragment() {
 
         binding.settingBtn.setOnClickListener {
             Log.d("test","액티비티 호출")
-            val intent =Intent(requireContext(),SettingActivity::class.java)
+            val intent =Intent(requireContext(), SettingActivity::class.java)
             startActivity(intent)
             //(activity as MainActivity).overridePendingTransition(R.anim.none,R.anim.vertical_enter)
         }

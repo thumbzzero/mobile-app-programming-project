@@ -1,17 +1,17 @@
-package com.example.mobileappproject
+package com.example.mobileappproject.common
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var fragment1:LmsMainFragment
-    lateinit var fragment4:MoreFragment
+    lateinit var fragment1: LmsMainFragment
+    lateinit var fragment4: MoreFragment
     lateinit var fragmentManger:FragmentManager
 
     val initPageIndex:Int=1//처음 프래그먼트
