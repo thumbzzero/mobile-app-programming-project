@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".common.LmsMainFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="lms첫번째 페이지" />
+        android:layout_height="wrap_content"
+        android:text="과목"
+        android:background="@color/knu_purple"
+        android:padding="13dp"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:textStyle="bold"
 
-</FrameLayout>
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2022년 2학기"
+        android:paddingTop="13dp"
+        android:paddingLeft="13dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_rectangle"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            style="@style/dashboard_box"
+            android:text="모바일앱프로그래밍1" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/course_home_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+
+            android:text="과목 홈 바로가기 →"
+            android:backgroundTint="@color/knu_lightgray"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
