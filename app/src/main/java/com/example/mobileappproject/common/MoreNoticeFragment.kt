@@ -1,18 +1,27 @@
 package com.example.mobileappproject.common
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileappproject.data.DBHelper
 import com.example.mobileappproject.data.NoticeAdapter
 import com.example.mobileappproject.data.NoticeInfo
 import com.example.mobileappproject.databinding.FragmentMoreNoticeBinding
+import org.jsoup.Jsoup
+import kotlin.concurrent.thread
 
 
 class MoreNoticeFragment : Fragment() {
-
+    val datas = mutableListOf<NoticeInfo>()
+    lateinit var recyclerView:RecyclerView
+    val adapter:NoticeAdapter = NoticeAdapter(datas)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -20,27 +29,114 @@ class MoreNoticeFragment : Fragment() {
         val binding = FragmentMoreNoticeBinding.inflate(inflater,container,false)
 
         val layoutManager = LinearLayoutManager(activity)
-        binding.recyclerView.layoutManager=layoutManager
-        val datas = mutableListOf<NoticeInfo>()
+
+        recyclerView = binding.recyclerView
+        recyclerView.layoutManager=layoutManager
+
+        adapter.setItemClickListener(object : NoticeAdapter.OnItemClickListener {
+            override fun OnClick(v: View, position: Int) {
+                val data = datas[position]
+
+                val intent = Intent(Intent.ACTION_VIEW,Uri.parse(data.site_address))
+                startActivity(intent)
+            }
+        })
+        recyclerView.adapter=adapter
 
 
 
-        for(i in 1..9){
-            datas.add(NoticeInfo("제목$i","날짜$i","사이트$i","조회수 $i","test"))
-        }
+        showDB()
 
-
-
-        val adapter=NoticeAdapter(datas)
-        binding.recyclerView.adapter=adapter
-
-
+        findNoticeLocal()
 
 
 
 
         return binding.root
     }
+
+
+
+    fun findNoticeLocal(){
+        val CSE:List<String> = listOf("https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%9D%BC%EB%B0%98%EA%B3%B5%EC%A7%80",
+            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%ED%95%99%EC%82%AC",
+            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%9E%A5%ED%95%99,",
+            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%8B%AC%EC%BB%B4",
+            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EA%B8%80%EC%86%9D",
+            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_3_a")
+        val CSENAME:List<String> = listOf("컴퓨터학부-일반공지","컴퓨터학부-학사공지","컴퓨터학부-장학","컴퓨터학부-심컴",
+            "컴퓨터학부-글솝","컴퓨터학부-학부인재")
+        Log.d("test","findNoticeLocal 호출")
+        thread {
+            val dbHelper = DBHelper(context,"localDB.db",null,1)
+            val db = dbHelper.writableDatabase
+            val sql ="insert into NoticeInfo (title, date, site, views, site_address) values (?, ?, ?, ?, ?)"
+            try {
+                for(i in 0..CSE.size-1){
+                    val doc = Jsoup.connect(CSE[i])
+                        .get()
+                    val element = doc.select("tbody tr")
+                    for (elem in element){
+                        val title = elem.select("div.bo_tit").text()
+                        val pageUrl = elem.select("a").attr("abs:href")
+                        val date = elem.select("td.td_datetime.hidden-xs").text()
+                        val views = elem.select("td.td_num.hidden-xs").text()
+                        val site = CSENAME[i]
+                        val arg = arrayOf<String>(title,date,site,views,pageUrl)
+
+                        try {
+                            db.execSQL(sql,arg)
+                        }catch (e:Exception){}
+
+                    }
+                }
+
+
+
+                db.close()
+
+            }catch (e:Exception){ }
+            activity?.runOnUiThread {
+                showDB()
+            }
+        }
+
+    }
+    fun showDB(){
+        Log.d("test","showDB호출")
+        datas.clear()
+
+
+
+        val dbHelper = DBHelper(context,"localDB.db",null,1)
+        val db = dbHelper.writableDatabase
+
+        val sql ="SELECT * FROM NoticeInfo ORDER BY date DESC, views DESC"
+        val c =db.rawQuery(sql,null)
+
+        while(c.moveToNext()){
+            val title_pos=c.getColumnIndex("title")
+            val date_pos = c.getColumnIndex("date")
+            val site_pos = c.getColumnIndex("site")
+            val views_pos = c.getColumnIndex("views")
+            val site_address_pos = c.getColumnIndex("site_address")
+
+            val title =c.getString(title_pos)
+            val date = c.getString(date_pos)
+            val site=c.getString(site_pos)
+            val views=c.getString(views_pos)
+            val site_address=c.getString(site_address_pos)
+            datas.add(NoticeInfo(title,date,site,views,site_address))
+
+        }
+
+        db.close()
+        Log.d("test","어뎁터 생성,${datas.size}")
+
+
+        adapter.notifyDataSetChanged()
+    }
+
 
 
 }

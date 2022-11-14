@@ -19,7 +19,7 @@ class DBHelper(
                 + "date text not null, "
                 + "site text not null, "
                 + "views text not null, "
-                + "site_address text not null, "
+                + "site_address text not null"
                 + ")")
 
         db?.execSQL(sql)

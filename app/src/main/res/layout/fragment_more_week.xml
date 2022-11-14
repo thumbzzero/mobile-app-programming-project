@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9C27B0"
+    android:background="#CBE1E1E1"
     tools:context=".common.MoreWeekFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_week"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="week 페이지" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

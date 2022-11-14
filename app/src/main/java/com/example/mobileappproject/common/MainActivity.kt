@@ -1,5 +1,6 @@
 package com.example.mobileappproject.common
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,13 @@ class MainActivity : AppCompatActivity() {
     var backBtnTime = 0L
     var backBtnList =  mutableListOf<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
+        val isLogined:Boolean=false
+        if(!isLogined){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
