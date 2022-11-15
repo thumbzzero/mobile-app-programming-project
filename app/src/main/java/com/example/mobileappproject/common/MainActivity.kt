@@ -1,13 +1,18 @@
 package com.example.mobileappproject.common
 
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.mobileappproject.DBManager.Test
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var fragment1: LmsMainFragment
@@ -21,6 +26,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //mySQL8이상에서는 DB와 연동하기 전에 안드로이드 정책에 따라 setting할 필요가 있음.
+        //만일 아래 문구를 넣지 않을 경우 SQLNonTransientConnectionException이 발생함
+        if (Build.VERSION.SDK_INT > 9) {
+            val policy = ThreadPolicy.Builder().permitAll().build()
+            StrictMode.setThreadPolicy(policy)
+        }
 
 
         val bottomNavigationView = binding.navView
@@ -57,6 +69,9 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
+
+
+        Test.connectiom()
     }
     fun changeFragment(index:Int, change:Boolean){
         if(!backBtnList.contains(index) && change) backBtnList.add(index)
