@@ -17,6 +17,7 @@ import com.example.mobileappproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var fragment1: LmsMainFragment
+    lateinit var fragment2: CalenderFragment
     lateinit var fragment5: MoreFragment
     lateinit var fragmentManger:FragmentManager
 
@@ -86,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         if(!backBtnList.contains(index) && change) backBtnList.add(index)
 
         if(!::fragment1.isInitialized) fragment1 = LmsMainFragment()
+        if(!::fragment2.isInitialized) fragment2 = CalenderFragment()
         if(!::fragment5.isInitialized) fragment5 = MoreFragment()
         val transaction: FragmentTransaction = fragmentManger.beginTransaction()
         when(index){
@@ -93,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 transaction.replace(R.id.fragment_container,fragment1).commit()
             }
             2->{
-
+                transaction.replace(R.id.fragment_container,fragment2).commit()
             }
             3->{
 
