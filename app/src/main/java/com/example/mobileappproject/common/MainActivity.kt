@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
 
 
         Test.connectiom()
+        Test.disconnection()
     }
     fun changeFragment(index:Int, change:Boolean){
         if(!backBtnList.contains(index) && change) backBtnList.add(index)

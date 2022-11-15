@@ -13,7 +13,7 @@ class DBHelper(
 ): SQLiteOpenHelper(context, name, factory, version) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        Log.d("test","데이터베이스가 생성되었습니다")
+        Log.d("DB","데이터베이스가 생성되었습니다")
         val sql = ("create table NoticeInfo("
                 + "title text primary key, "
                 + "date text not null, "

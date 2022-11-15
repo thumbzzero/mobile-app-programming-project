@@ -1,13 +1,11 @@
 package com.example.mobileappproject.DBManager
 
 import android.util.Log
-import android.util.LogPrinter
 import java.sql.*
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.SQLException
 
 object Test{
+    private val DEBUGMODE = true
+
     lateinit var conn: Connection
     lateinit var url: String
     lateinit var uid: String
@@ -17,46 +15,74 @@ object Test{
 
     @JvmStatic
     fun connectiom(){
-
-        Log.e(tagERR, "DB connection start")
+        if (DEBUGMODE) Log.e(tagERR, "DB connection start")
 
         initSetting()
 
         Log.e(tagERR, "DB Connecting start!")
+        //jdbc8이상을 사용할 경우 "com.mysql.cj.jdbc.Driver"을 사용해야함.
+        //문제는 안드로이드에서는 jdbc8이상을 아직 지원하지 않음.
+        // 만일 사용하려 할 경우 "java.sql.SQLType" Class를 찾지 못하여 Exception이 발생할 것임
+        //따라서 필요에 의해 jdbc 8.0.31 대신에 jdbc 5.1.49를 사용하게 됨.
         try {
-            //jdbc8이상을 사용할 경우 "com.mysql.cj.jdbc.Driver"을 사용해야함.
-            //문제는 안드로이드에서는 jdbc8이상을 아직 지원하지 않음.
-            // 만일 사용하려 할 경우 "java.sql.SQLType" Class를 찾지 못하여 Exception이 발생할 것임
-            //따라서 필요에 의해 jdbc 8.0.31 대신에 jdbc 5.1.49를 사용하게 됨.
             Class.forName("com.mysql.jdbc.Driver")
             conn = DriverManager.getConnection(url, uid, upw)
+
+            val statement: Statement
+            statement = conn.createStatement()
+            val resultSet: ResultSet
+            resultSet = statement.executeQuery(
+                "select * from myproject.SUB_INFO_TB sit "
+            )
+            var sub_name: String
+            var sub_code: String
+            var sub_pro: String
+            var sub_std: String
+            println(
+                "sub_name" + "   /  " + "sub_code" + "  /   " + "sub_pro" + "  /   " + "sub_std"
+            )
+            while (resultSet.next()) {
+                sub_name = resultSet.getString("SUB_NAME")
+                sub_code = resultSet.getString("SUB_CODE")
+                sub_pro = resultSet.getString("SUB_PRO")
+                sub_std = resultSet.getString("SUB_STD").trim()
+                println(
+                    sub_name + "   /  " + sub_code + "  /   " + sub_pro + "  /   " + sub_std
+                )
+            }
+
+            resultSet.close();
+            statement.close();
+
         } catch (e: SQLException){
             //SQLNonTransientConnectionException
             e.printStackTrace()
         } catch (e: Exception){
+
         }
-        Log.e(tagERR, "DB Connecting end!")
 
+        if (DEBUGMODE) Log.e(tagERR, "DB Connecting end!")
+    }
 
+    @JvmStatic
+    fun disconnection(){
+        if (DEBUGMODE) Log.e(tagERR, "DB disconnection start")
         try {
             conn?.close()
-
         } catch (e: Exception){
             Log.e(tagERR, "DB close Exception!")
-
         }
-
-
+        if (DEBUGMODE) Log.e(tagERR, "DB disconnection end")
     }
 
     fun initSetting(){
-        Log.e(tagERR, "DB Init Setting start!")
+
+        if (DEBUGMODE) Log.e(tagERR, "DB Init Setting start!")
 
         url = "jdbc:mysql://database-1.cufw1avtqftd.ap-northeast-2.rds.amazonaws.com:3306/myproject?"
                                                                 /* localhost 대신 127.0.0.1 사용 가능
                                                                 * 3308(기본 3306) : 설치 시 지정한 포트 번호
                                                                 * 맨 뒤 : 연결 할 DB 이름 */
-        Log.e(tagERR, "DB Init Setting url is $url")
 
         url += "useSSL=false&" // 인증방식 설정 : SSL로 접속할 것인가?
         url += "serverTimezone=UTC&" // 서버시간 설정
@@ -77,6 +103,6 @@ object Test{
         uid = "root"
         upw = "1234"
 
-        Log.e(tagERR, "DB Init Setting end!")
+        if (DEBUGMODE) Log.e(tagERR, "DB Init Setting end!")
     }
 }
