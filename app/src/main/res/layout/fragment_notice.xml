@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".common.NoticeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/knu_size"
+        android:text="알림"
+        android:background="@color/knu_purple"
+        android:padding="13dp"
+        android:textColor="@color/knu_title"
+        android:textSize="@dimen/knu_title_size"
+        android:textStyle="bold"
+        />
+
+</FrameLayout>

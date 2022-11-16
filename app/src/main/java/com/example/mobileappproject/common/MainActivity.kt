@@ -18,6 +18,8 @@ import com.example.mobileappproject.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     lateinit var fragment1: LmsMainFragment
     lateinit var fragment2: CalenderFragment
+    lateinit var fragment3: NoticeFragment
+    lateinit var fragment4: MessageFragment
     lateinit var fragment5: MoreFragment
     lateinit var fragmentManger:FragmentManager
 
@@ -88,6 +90,8 @@ class MainActivity : AppCompatActivity() {
 
         if(!::fragment1.isInitialized) fragment1 = LmsMainFragment()
         if(!::fragment2.isInitialized) fragment2 = CalenderFragment()
+        if(!::fragment3.isInitialized) fragment3 = NoticeFragment()
+        if(!::fragment4.isInitialized) fragment4 = MessageFragment()
         if(!::fragment5.isInitialized) fragment5 = MoreFragment()
         val transaction: FragmentTransaction = fragmentManger.beginTransaction()
         when(index){
@@ -98,10 +102,10 @@ class MainActivity : AppCompatActivity() {
                 transaction.replace(R.id.fragment_container,fragment2).commit()
             }
             3->{
-
+                transaction.replace(R.id.fragment_container,fragment3).commit()
             }
             4->{
-
+                transaction.replace(R.id.fragment_container,fragment4).commit()
             }
             5->{
                 transaction.replace(R.id.fragment_container,fragment5).commit()
