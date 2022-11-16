@@ -3,8 +3,8 @@ package com.example.mobileappproject.DBManager
 import android.util.Log
 import java.sql.*
 
-object Test{
-    private val DEBUGMODE = true
+object DBConnectManager{
+    private val DEBUGMODE = false
 
     lateinit var conn: Connection
     lateinit var url: String
@@ -14,12 +14,12 @@ object Test{
 
 
     @JvmStatic
-    fun connectiom(){
-        if (DEBUGMODE) Log.e(tagERR, "DB connection start")
+    fun connection(){
+        if(DEBUGMODE) Log.e(tagERR, "DB connection start")
 
         initSetting()
 
-        Log.e(tagERR, "DB Connecting start!")
+        if(DEBUGMODE) Log.e(tagERR, "DB Connecting start!")
         //jdbc8이상을 사용할 경우 "com.mysql.cj.jdbc.Driver"을 사용해야함.
         //문제는 안드로이드에서는 jdbc8이상을 아직 지원하지 않음.
         // 만일 사용하려 할 경우 "java.sql.SQLType" Class를 찾지 못하여 Exception이 발생할 것임
@@ -28,37 +28,13 @@ object Test{
             Class.forName("com.mysql.jdbc.Driver")
             conn = DriverManager.getConnection(url, uid, upw)
 
-            val statement: Statement
-            statement = conn.createStatement()
-            val resultSet: ResultSet
-            resultSet = statement.executeQuery(
-                "select * from myproject.SUB_INFO_TB sit "
-            )
-            var sub_name: String
-            var sub_code: String
-            var sub_pro: String
-            var sub_std: String
-            println(
-                "sub_name" + "   /  " + "sub_code" + "  /   " + "sub_pro" + "  /   " + "sub_std"
-            )
-            while (resultSet.next()) {
-                sub_name = resultSet.getString("SUB_NAME")
-                sub_code = resultSet.getString("SUB_CODE")
-                sub_pro = resultSet.getString("SUB_PRO")
-                sub_std = resultSet.getString("SUB_STD").trim()
-                println(
-                    sub_name + "   /  " + sub_code + "  /   " + sub_pro + "  /   " + sub_std
-                )
-            }
-
-            resultSet.close();
-            statement.close();
+            DBInfoManager.initMap()
 
         } catch (e: SQLException){
             //SQLNonTransientConnectionException
             e.printStackTrace()
         } catch (e: Exception){
-
+            //
         }
 
         if (DEBUGMODE) Log.e(tagERR, "DB Connecting end!")
@@ -75,7 +51,7 @@ object Test{
         if (DEBUGMODE) Log.e(tagERR, "DB disconnection end")
     }
 
-    fun initSetting(){
+    private fun initSetting(){
 
         if (DEBUGMODE) Log.e(tagERR, "DB Init Setting start!")
 

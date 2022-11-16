@@ -5,12 +5,14 @@ import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
+import android.service.carrier.CarrierMessagingService.SendMmsResult
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.mobileappproject.DBManager.Test
+import com.example.mobileappproject.DBManager.DBConnectManager
+import com.example.mobileappproject.DBManager.DBManager
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityMainBinding
 
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     var backBtnTime = 0L
     var backBtnList =  mutableListOf<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
-        val isLogined:Boolean=false
+        val isLogined:Boolean=true
         if(!isLogined){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -79,8 +81,15 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        Test.connectiom()
-        Test.disconnection()
+        DBConnectManager.connection()
+        DBConnectManager.disconnection()
+
+        val DEBUGMODE = true
+        val temp = DBManager.getSTDINFO("ruddbsdms", "4534")
+
+        if(DEBUGMODE) Log.e("DB test ",
+            "test debug -------------------------------\n" + temp
+        )
     }
     fun changeFragment(index:Int, change:Boolean){
         if(!backBtnList.contains(index) && change) backBtnList.add(index)
