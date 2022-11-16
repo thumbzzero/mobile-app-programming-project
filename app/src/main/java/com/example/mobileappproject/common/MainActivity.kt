@@ -5,12 +5,14 @@ import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
+import android.service.carrier.CarrierMessagingService.SendMmsResult
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.mobileappproject.DBManager.Test
+import com.example.mobileappproject.DBManager.DBConnectManager
+import com.example.mobileappproject.DBManager.DBManager
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityMainBinding
 
@@ -18,6 +20,8 @@ import com.example.mobileappproject.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     lateinit var fragment1: LmsMainFragment
     lateinit var fragment2: CalenderFragment
+    lateinit var fragment3: NoticeFragment
+    lateinit var fragment4: MessageFragment
     lateinit var fragment5: MoreFragment
     lateinit var fragmentManger:FragmentManager
 
@@ -25,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     var backBtnTime = 0L
     var backBtnList =  mutableListOf<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
-        val isLogined:Boolean=false
+        val isLogined:Boolean=true
         if(!isLogined){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -80,14 +84,23 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        Test.connectiom()
-        Test.disconnection()
+        DBConnectManager.connection()
+        DBConnectManager.disconnection()
+
+        val DEBUGMODE = true
+        val temp = DBManager.getSTDINFO("ruddbsdms", "4534")
+
+        if(DEBUGMODE) Log.e("DB test ",
+            "test debug -------------------------------\n" + temp
+        )
     }
     fun changeFragment(index:Int, change:Boolean){
         if(!backBtnList.contains(index) && change) backBtnList.add(index)
 
         if(!::fragment1.isInitialized) fragment1 = LmsMainFragment()
         if(!::fragment2.isInitialized) fragment2 = CalenderFragment()
+        if(!::fragment3.isInitialized) fragment3 = NoticeFragment()
+        if(!::fragment4.isInitialized) fragment4 = MessageFragment()
         if(!::fragment5.isInitialized) fragment5 = MoreFragment()
         val transaction: FragmentTransaction = fragmentManger.beginTransaction()
         when(index){
@@ -98,10 +111,10 @@ class MainActivity : AppCompatActivity() {
                 transaction.replace(R.id.fragment_container,fragment2).commit()
             }
             3->{
-
+                transaction.replace(R.id.fragment_container,fragment3).commit()
             }
             4->{
-
+                transaction.replace(R.id.fragment_container,fragment4).commit()
             }
             5->{
                 transaction.replace(R.id.fragment_container,fragment5).commit()

@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobileappproject.databinding.FragmentCalenderBinding
 import com.example.mobileappproject.databinding.ItemCalendarGridviewBinding
 
 class CalenderAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {

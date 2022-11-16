@@ -19,24 +19,20 @@ class CalenderFragment : Fragment() {
 
     ): View? {
         binding = FragmentCalenderBinding.inflate(inflater,container,false)
-        val zzz = binding.tvDate
+        val textCalender = binding.tvDate
 
-        val today= LocalDateTime.now()
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy년 / MM월")
-        val formatted = current.format(formatter)
-
+        //val today= LocalDateTime.now()
+        //val current = LocalDateTime.now()
+        //val formatter = DateTimeFormatter.ofPattern("yyyy년 / MM월")
+        //val formatted = current.format(formatter)
+        //textCalender.setText("$formatted")
         super.onCreate(savedInstanceState)
-
-
-
-
 
 
         //val dayList = ArrayList<String>()
         val datas = mutableListOf<String>()
 
-        zzz.setText("$formatted")
+
         binding.calenderView.layoutManager = GridLayoutManager(activity,7)
         binding.calenderView.adapter = CalenderAdapter(datas)
         datas.add("일")
@@ -54,7 +50,7 @@ class CalenderFragment : Fragment() {
 
         val month =cal.get(Calendar.MONTH)
         val year = cal.get(Calendar.YEAR)
-        zzz.setText("${year}년 / ${month+1}월")
+        textCalender.setText("${year}년 / ${month+1}월")
         val nWeek: Int = cal.get(Calendar.DAY_OF_WEEK)
         val lastday= cal.getActualMaximum(Calendar.DAY_OF_MONTH)
 

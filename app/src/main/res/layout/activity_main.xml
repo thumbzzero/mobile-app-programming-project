@@ -12,6 +12,11 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
     </FrameLayout>
 
@@ -23,5 +28,7 @@
         app:itemTextColor="#777777"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_bottom" />
+
+
 
 </LinearLayout>
