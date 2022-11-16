@@ -3,30 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2065" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/drawable/circle_button.xml" value="0.117" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/drawable/edge.xml" value="0.2065" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2065" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/drawable/round_rectangle.xml" value="0.2065" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/layout/activity_mypage.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/layout/fragment_lms_main.xml" value="0.264" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/layout/fragment_more.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/layout/fragment_more_notice.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/layout/fragment_more_week.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/Desktop/project/mobile-app-programming-project/app/src/main/res/layout/notice_data.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/activity_login.xml" value="0.23802083333333332" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/activity_main.xml" value="0.1116751269035533" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/activity_mypage.xml" value="0.1765625" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/fragment_calender.xml" value="0.264" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/fragment_lms_main.xml" value="0.1765625" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/fragment_message.xml" value="0.23802083333333332" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/fragment_more.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/fragment_more_notice.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/fragment_more_week.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/fragment_notice.xml" value="0.1" />
-        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/item_calendar_gridview.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/eotjd/StudioProjects/mobile-app-programming-project/app/src/main/res/layout/fragment_calender.xml" value="0.1718213058419244" />
       </map>
     </option>
   </component>
