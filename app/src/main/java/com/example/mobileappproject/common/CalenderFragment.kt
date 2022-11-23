@@ -46,7 +46,7 @@ class CalenderFragment : Fragment() {
         val cal: Calendar = Calendar.getInstance()
 
         //cal.set(Calendar.MONTH,5)
-
+        cal.set(Calendar.DATE,1)
 
         val month =cal.get(Calendar.MONTH)
         val year = cal.get(Calendar.YEAR)

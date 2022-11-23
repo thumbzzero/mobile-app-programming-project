@@ -36,26 +36,7 @@
 
 
 
-        <Button
-            android:id="@+id/buttonCalender1"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="0dp"
-            android:layout_toEndOf="@+id/tv_date"
-            android:text="+" />
 
-        <Button
-            android:id="@+id/buttonCalender2"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-
-
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="0dp"
-            android:layout_toEndOf="@+id/tv_date"
-            android:text="-" />
 
 
     </RelativeLayout>
@@ -69,3 +50,30 @@
 
 
 </LinearLayout>
+
+
+
+
+<!--
+
+      <Button
+            android:id="@+id/buttonCalender1"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/tv_date"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/buttonCalender2"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/tv_date"
+            android:text="-" />
+-->
+
+
