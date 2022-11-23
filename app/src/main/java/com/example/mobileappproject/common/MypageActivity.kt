@@ -3,8 +3,10 @@ package com.example.mobileappproject.common
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityMypageBinding
+import java.io.File
 
 class MypageActivity : AppCompatActivity() {
 
@@ -17,6 +19,13 @@ class MypageActivity : AppCompatActivity() {
 
         binding.backBtn.setOnClickListener{
             onBackPressed()
+        }
+        binding.logoutTxt.setOnClickListener {
+            val filepath = filesDir.path + "/loginInfo.txt"
+            val file = File(filepath)
+            if(file.exists()) {
+                file.delete()
+            }
         }
 
 

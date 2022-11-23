@@ -13,8 +13,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.mobileappproject.DBManager.DBConnectManager
 import com.example.mobileappproject.DBManager.DBManager
+import com.example.mobileappproject.DBManager.DB_dc_std_info
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityMainBinding
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,8 +32,35 @@ class MainActivity : AppCompatActivity() {
     val initPageIndex:Int=1//처음 프래그먼트
     var backBtnTime = 0L
     var backBtnList =  mutableListOf<Int>()
+    lateinit var temp:DB_dc_std_info
     override fun onCreate(savedInstanceState: Bundle?) {
-        val isLogined:Boolean=true
+        var isLogined:Boolean=true
+
+        DBConnectManager.connection()
+        DBConnectManager.disconnection()
+        var id=""
+        var pw=""
+        val filePath = filesDir.path + "/loginInfo.txt"
+        val file = File(filePath)
+        if(!file.exists()){//로그인 이력이 없으면 파일없음
+            isLogined=false
+            Log.d("test","파일없음")
+        }
+        else{
+            Log.d("test","파일있음 $filePath")
+            val fileReader = FileReader(file)
+            val bufferedReader = BufferedReader(fileReader)
+
+            id=bufferedReader.readLine()
+            pw=bufferedReader.readLine()
+            Log.d("test","From file id = $id , pw= $pw")
+            bufferedReader.close()
+            temp = DBManager.getSTDINFO(id, pw)
+            if(temp.id=="null") isLogined=false//DB에 id,pw가 없으면 temp.id==null이므로 로그인해야함
+        }
+
+
+
         if(!isLogined){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -84,15 +115,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        DBConnectManager.connection()
-        DBConnectManager.disconnection()
+
 
         val DEBUGMODE = true
-        val temp = DBManager.getSTDINFO("ruddbsdms", "4534")
 
-        if(DEBUGMODE) Log.e("DB test ",
-            "test debug -------------------------------\n" + temp
-        )
+
+//        if(DEBUGMODE) Log.e("DB test ",
+//            "test debug -------------------------------\n" + temp
+//        )
     }
     fun changeFragment(index:Int, change:Boolean){
         if(!backBtnList.contains(index) && change) backBtnList.add(index)
