@@ -1,7 +1,6 @@
 package com.example.mobileappproject.common
 
 import android.content.Intent
-import android.content.LocusId
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
@@ -11,16 +10,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.mobileappproject.DBManager.DBConnectManager
-import com.example.mobileappproject.DBManager.DBManager
-import com.example.mobileappproject.DBManager.DB_dc_std_info
+import com.example.mobileappproject.DBManager.*
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityMainBinding
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 
-
+object Student{
+    lateinit var stdInfo:DB_dc_std_info
+    lateinit var stdCourseInfo:ArrayList<DB_dc_std_course_info>
+}
 class MainActivity : AppCompatActivity() {
     lateinit var fragment1: LmsMainFragment
     lateinit var fragment2: CalenderFragment
@@ -64,8 +64,12 @@ class MainActivity : AppCompatActivity() {
             temp = DBManager.getSTDINFO(id, pw)
             if(temp.name=="null") {
                 isLogined = false//DB에 id,pw가 없으면 temp.id==null이므로 로그인해야함
+            }else{
+                Log.d("test","From file id=$id, pw=$pw =>login"+temp)
+                Student.stdInfo=temp
+                Student.stdCourseInfo=DBManager.getSTDCOS(Student.stdInfo.sid)
             }
-            Log.d("test","From file id=$id, pw=$pw =>login"+temp)
+
         }
 
 
