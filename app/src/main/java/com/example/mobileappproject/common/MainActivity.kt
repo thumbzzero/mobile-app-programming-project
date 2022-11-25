@@ -1,11 +1,11 @@
 package com.example.mobileappproject.common
 
 import android.content.Intent
+import android.content.LocusId
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
-import android.service.carrier.CarrierMessagingService.SendMmsResult
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,7 +35,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var temp:DB_dc_std_info
     override fun onCreate(savedInstanceState: Bundle?) {
         var isLogined:Boolean=true
-
+        //mySQL8이상에서는 DB와 연동하기 전에 안드로이드 정책에 따라 setting할 필요가 있음.
+        //만일 아래 문구를 넣지 않을 경우 SQLNonTransientConnectionException이 발생함
+        if (Build.VERSION.SDK_INT > 9) {
+            val policy = ThreadPolicy.Builder().permitAll().build()
+            StrictMode.setThreadPolicy(policy)
+        }
         DBConnectManager.connection()
         DBConnectManager.disconnection()
         var id=""
@@ -53,10 +58,14 @@ class MainActivity : AppCompatActivity() {
 
             id=bufferedReader.readLine()
             pw=bufferedReader.readLine()
-            Log.d("test","From file id = $id , pw= $pw")
+
+
             bufferedReader.close()
             temp = DBManager.getSTDINFO(id, pw)
-            if(temp.id=="null") isLogined=false//DB에 id,pw가 없으면 temp.id==null이므로 로그인해야함
+            if(temp.name=="null") {
+                isLogined = false//DB에 id,pw가 없으면 temp.id==null이므로 로그인해야함
+            }
+            Log.d("test","From file id=$id, pw=$pw =>login"+temp)
         }
 
 
@@ -71,12 +80,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //mySQL8이상에서는 DB와 연동하기 전에 안드로이드 정책에 따라 setting할 필요가 있음.
-        //만일 아래 문구를 넣지 않을 경우 SQLNonTransientConnectionException이 발생함
-        if (Build.VERSION.SDK_INT > 9) {
-            val policy = ThreadPolicy.Builder().permitAll().build()
-            StrictMode.setThreadPolicy(policy)
-        }
+
 
 
         val bottomNavigationView = binding.navView
@@ -117,12 +121,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val DEBUGMODE = true
 
-
-//        if(DEBUGMODE) Log.e("DB test ",
-//            "test debug -------------------------------\n" + temp
-//        )
     }
     fun changeFragment(index:Int, change:Boolean){
         if(!backBtnList.contains(index) && change) backBtnList.add(index)

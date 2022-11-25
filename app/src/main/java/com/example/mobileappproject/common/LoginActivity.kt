@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
             val pw = binding.passwordTxt.text.toString()
 
             val temp = DBManager.getSTDINFO(id, pw)
-            if(temp.id!="null"){//로그인 성공시 , 로컬저장소에 파일로 id,pw저장
+            if(temp.name!="null"){//로그인 성공시 , 로컬저장소에 파일로 id,pw저장
                 val filepath = filesDir.path + "/loginInfo.txt"
                 Log.d("test",filepath)
                 var file = File(filepath)

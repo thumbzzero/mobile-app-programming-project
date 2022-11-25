@@ -25,6 +25,8 @@ class MypageActivity : AppCompatActivity() {
             val file = File(filepath)
             if(file.exists()) {
                 file.delete()
+                Log.d("test","로그인정보 삭제")
+                onBackPressed()
             }
         }
 
