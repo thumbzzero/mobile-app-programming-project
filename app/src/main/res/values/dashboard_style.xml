@@ -33,4 +33,9 @@
         <item name="android:text">과목 홈 바로가기 →</item>
         <item name="android:backgroundTint">@color/knu_lightgray</item>
     </style>
+    <style name="lms_notice_txt">
+        <item name = "android:textSize">14sp</item>
+        <item name = "android:textColor">@color/black</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>
