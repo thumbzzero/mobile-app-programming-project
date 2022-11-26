@@ -16,7 +16,8 @@ data class DB_dc_std_info(
 data class DB_dc_std_course_info(
     var sid: String = "", //학생 학번        STD_SID---
     var name: String = "", //학생 이름       STD_NAME
-    var sub: String = "" //수강 과목         STD_SUB---
+    var code: String = "", //수강 과목 코드   SUB_NAME
+    var sub: String = "" //수강 과목 이름     SUB_CODE---
 )
 
 data class DB_dc_sub_info(
@@ -26,19 +27,45 @@ data class DB_dc_sub_info(
     var std: String = "" //청강생 이름        SUB_STD---
 )
 
+data class DB_dc_sub_hw(
+    var seq: Int = 0,       //순번            SUB_HW_SEQ---
+    var code: String = "",  //과목 코드         SUB_CODE---
+    var sub: String = "",   //과목 이름         SUB_NAME
+    var date: String = "",  //과제 일자         SUB_HW_DATE
+    var hw_name: String = ""//과제 명          SUB_HW_NAME
+)
+
+data class DB_dc_sub_test(
+    var seq: Int = 0,       //순번            SUB_TEST_SEQ---
+    var code: String = "",  //과목 코드         SUB_CODE---
+    var sub: String = "",   //과목 이름         SUB_NAME
+    var date: String = "",  //시험 일자         SUB_TEST_DATE
+    var test_name: String = ""//시험 명          SUB_TEST_NAME
+)
+
 object DBInfoManager {
     private val DEBUGMODE = false
 
     var dbDcStdInfoMap: MutableMap<String, DB_dc_std_info> = mutableMapOf("" to DB_dc_std_info())
     var dbDcStdCourseInfoMap: MutableMap<Pair<String, String>, DB_dc_std_course_info> = mutableMapOf(Pair("", "") to DB_dc_std_course_info())
     var dbDcSubInfoMap: MutableMap<Pair<String, String>, DB_dc_sub_info> = mutableMapOf(Pair("","") to DB_dc_sub_info())
+    var dbDcSubHwMap: MutableMap<Pair<String, String>, DB_dc_sub_hw> = mutableMapOf(Pair("","") to DB_dc_sub_hw())
+    var dbDcSubTestMap: MutableMap<Pair<String, String>, DB_dc_sub_test> = mutableMapOf(Pair("","") to DB_dc_sub_test())
 
     fun initMap(){
         //dbDcStdInfoMap
 
-        get_STDINFO_Table()
-        get_STDCourseINFO_Table()
-        get_SUBINFO_Table()
+        try {
+
+            get_STDINFO_Table()
+            get_STDCourseINFO_Table()
+            get_SUBINFO_Table()
+            get_SUBHW_Table()
+            get_SUBTEST_Table()
+
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
 
     }
 
@@ -96,19 +123,20 @@ object DBInfoManager {
             )
 
             if(DEBUGMODE) println(
-                "STD_SID" + "   /  " + "STD_NAME" + "  /   " + "STD_SUB"
+                "STD_SID" + "   /  " + "STD_NAME" + "  /   " + "SUB_CODE" + "  /   " + "SUB_NAME"
             )
             while (resultSet.next()) {
                 var temp: DB_dc_std_course_info = DB_dc_std_course_info()
 
                 temp.sid = resultSet.getString("STD_SID")
                 temp.name = resultSet.getString("STD_NAME")
-                temp.sub = resultSet.getString("STD_SUB").trim()
+                temp.sub = resultSet.getString("SUB_NAME")
+                temp.code = resultSet.getString("SUB_CODE").trim()
                 if(DEBUGMODE) println(
-                    temp.sid + "   /  " + temp.name + "  /   " + temp.sub
+                    temp.sid + "   /  " + temp.name + "  /   " + temp.sub + "  /   " + temp.code
                 )
 
-                val pair: Pair<String, String> = Pair(temp.sid, temp.sub)
+                val pair: Pair<String, String> = Pair(temp.sid, temp.code)
                 dbDcStdCourseInfoMap.put(pair, temp)
             }
 
@@ -174,4 +202,65 @@ object DBInfoManager {
         }
     }
 
+    private fun get_SUBHW_Table(){
+        try{
+            val statement: Statement
+            statement = DBConnectManager.conn.createStatement()
+            val resultSet: ResultSet
+            resultSet = statement.executeQuery(
+                "select * from myproject.SUB_HW_TB sit "
+            )
+
+            while (resultSet.next()) {
+                var temp: DB_dc_sub_hw = DB_dc_sub_hw()
+
+                temp.seq = resultSet.getInt("SUB_HW_SEQ")
+                temp.code = resultSet.getString("SUB_CODE")
+                temp.sub = resultSet.getString("SUB_NAME")
+                temp.hw_name = resultSet.getString("SUB_HW_NAME")
+                temp.date = resultSet.getString("SUB_HW_DATE").trim()
+                if(DEBUGMODE) Log.d(
+                    "DB test",temp.sub + "   /  " + temp.code + "  /   " + temp.hw_name + "  /   " + temp.date
+                )
+
+                val pair = Pair(temp.code, temp.sub)
+                dbDcSubHwMap.put(pair, temp)
+            }
+            resultSet.close();
+            statement.close();
+        } catch (e: Exception){
+            //
+        }
+    }
+
+    private fun get_SUBTEST_Table(){
+        try{
+            val statement: Statement
+            statement = DBConnectManager.conn.createStatement()
+            val resultSet: ResultSet
+            resultSet = statement.executeQuery(
+                "select * from myproject.SUB_TEST_TB sit "
+            )
+
+            while (resultSet.next()) {
+                var temp: DB_dc_sub_test = DB_dc_sub_test()
+
+                temp.seq = resultSet.getInt("SUB_TEST_SEQ")
+                temp.code = resultSet.getString("SUB_CODE")
+                temp.sub = resultSet.getString("SUB_NAME")
+                temp.test_name = resultSet.getString("SUB_TEST_NAME")
+                temp.date = resultSet.getString("SUB_TEST_DATE").trim()
+                if(DEBUGMODE) Log.d(
+                    "DB test",temp.sub + "   /  " + temp.code + "  /   " + temp.test_name + "  /   " + temp.date
+                )
+
+                val pair = Pair(temp.code, temp.sub)
+                dbDcSubTestMap.put(pair, temp)
+            }
+            resultSet.close();
+            statement.close();
+        } catch (e: Exception){
+            //
+        }
+    }
 }
