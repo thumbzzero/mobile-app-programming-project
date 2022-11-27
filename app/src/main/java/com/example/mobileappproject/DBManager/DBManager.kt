@@ -69,4 +69,16 @@ object DBManager {
 
         return list
     }
+
+    /** get subject notification (by subject code and name)*/
+    fun getSUBNOTI(subjectCODE: String, subjectNAME: String): ArrayList<DB_dc_sub_noti>{
+        var list = ArrayList<DB_dc_sub_noti>()
+        for(it in DBInfoManager.dbDcSubNotiMap){
+            if(it.key.first == subjectCODE
+                && it.key.second == subjectNAME)
+                list.add(it.value)
+        }
+
+        return list
+    }
 }

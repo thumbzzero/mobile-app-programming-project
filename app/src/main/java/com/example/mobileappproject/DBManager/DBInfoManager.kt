@@ -43,6 +43,16 @@ data class DB_dc_sub_test(
     var test_name: String = ""//시험 명          SUB_TEST_NAME
 )
 
+data class DB_dc_sub_noti(
+    var seq: Int = 0,       //순번            SUB_NOTI_SEQ---
+    var code: String = "",  //과목 코드         SUB_CODE---
+    var sub: String = "",   //과목 이름         SUB_NAME
+    var title: String = "", //과목 공지사항 제목    SUB_NOTI_TITLE
+    var written: String = "",                   //SUB_NOTI_WRITTEN
+    var cont: String = "",                      //SUB_NOTI_CONT
+    var date: String = "",  //일자         SUB_NOTI_DATEE
+)
+
 object DBInfoManager {
     private val DEBUGMODE = false
 
@@ -51,6 +61,7 @@ object DBInfoManager {
     var dbDcSubInfoMap: MutableMap<Pair<String, String>, DB_dc_sub_info> = mutableMapOf(Pair("","") to DB_dc_sub_info())
     var dbDcSubHwMap: MutableMap<Pair<String, String>, DB_dc_sub_hw> = mutableMapOf(Pair("","") to DB_dc_sub_hw())
     var dbDcSubTestMap: MutableMap<Pair<String, String>, DB_dc_sub_test> = mutableMapOf(Pair("","") to DB_dc_sub_test())
+    var dbDcSubNotiMap: MutableMap<Pair<String, String>, DB_dc_sub_noti> = mutableMapOf(Pair("","") to DB_dc_sub_noti())
 
     fun initMap(){
         //dbDcStdInfoMap
@@ -62,6 +73,7 @@ object DBInfoManager {
             get_SUBINFO_Table()
             get_SUBHW_Table()
             get_SUBTEST_Table()
+            get_SUBNOTI_Table()
 
         }catch (e: Exception){
             e.printStackTrace()
@@ -256,6 +268,45 @@ object DBInfoManager {
 
                 val pair = Pair(temp.code, temp.sub)
                 dbDcSubTestMap.put(pair, temp)
+            }
+            resultSet.close();
+            statement.close();
+        } catch (e: Exception){
+            //
+        }
+    }
+
+    private fun get_SUBNOTI_Table(){
+        try{
+            val statement: Statement
+            statement = DBConnectManager.conn.createStatement()
+            val resultSet: ResultSet
+            resultSet = statement.executeQuery(
+                "select * from myproject.SUB_NOTI_TB sit "
+            )
+
+            while (resultSet.next()) {
+                var temp: DB_dc_sub_noti = DB_dc_sub_noti()
+
+                temp.seq = resultSet.getInt("SUB_NOTI_SEQ")
+                temp.code = resultSet.getString("SUB_CODE")
+                temp.sub = resultSet.getString("SUB_NAME")
+                temp.title = resultSet.getString("SUB_NOTI_TITLE")
+                temp.written = resultSet.getString("SUB_NOTI_WRITTEN")
+                temp.cont = resultSet.getString("SUB_NOTI_CONT")
+                temp.date = resultSet.getString("SUB_NOTI_DATE").trim()
+                if(true) Log.d(
+                    "DB test",temp.code
+                            + "  /   " + temp.sub
+                            + "  /   " + temp.title
+                            + "  /   " + temp.written
+                            + "  /   " + temp.cont
+                            + "  /   " + temp.date
+
+                )
+
+                val pair = Pair(temp.code, temp.sub)
+                dbDcSubNotiMap.put(pair, temp)
             }
             resultSet.close();
             statement.close();
