@@ -47,38 +47,32 @@ object DBManager {
     }
 
     /** get subject homework info (by subject code and name)*/
-    fun getSUBHW(subjectCODE: String, subjectNAME: String): ArrayList<DB_dc_sub_hw>{
-        var list = ArrayList<DB_dc_sub_hw>()
+    fun getSUBHW(subjectCODE: String): ArrayList<DB_dc_sub_hw>{
         for(it in DBInfoManager.dbDcSubHwMap){
-            if(it.key.first == subjectCODE
-                && it.key.second == subjectNAME)
-                list.add(it.value)
+            if(it.key == subjectCODE)
+                return it.value
         }
 
-        return list
+        return arrayListOf()
     }
 
     /** get subject term test info (by subject code and name)*/
-    fun getSUBTEST(subjectCODE: String, subjectNAME: String): ArrayList<DB_dc_sub_test>{
-        var list = ArrayList<DB_dc_sub_test>()
+    fun getSUBTEST(subjectCODE: String): ArrayList<DB_dc_sub_test>{
         for(it in DBInfoManager.dbDcSubTestMap){
-            if(it.key.first == subjectCODE
-                && it.key.second == subjectNAME)
-                list.add(it.value)
+            if(it.key == subjectCODE)
+                return it.value
         }
 
-        return list
+        return arrayListOf()
     }
 
     /** get subject notification (by subject code and name)*/
-    fun getSUBNOTI(subjectCODE: String, subjectNAME: String): ArrayList<DB_dc_sub_noti>{
-        var list = ArrayList<DB_dc_sub_noti>()
+    fun getSUBNOTI(subjectCODE: String): ArrayList<DB_dc_sub_noti>{
         for(it in DBInfoManager.dbDcSubNotiMap){
-            if(it.key.first == subjectCODE
-                && it.key.second == subjectNAME)
-                list.add(it.value)
+            if(it.key == subjectCODE)
+                return it.value
         }
 
-        return list
+        return arrayListOf()
     }
 }

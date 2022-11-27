@@ -59,9 +59,9 @@ object DBInfoManager {
     var dbDcStdInfoMap: MutableMap<String, DB_dc_std_info> = mutableMapOf("" to DB_dc_std_info())
     var dbDcStdCourseInfoMap: MutableMap<Pair<String, String>, DB_dc_std_course_info> = mutableMapOf(Pair("", "") to DB_dc_std_course_info())
     var dbDcSubInfoMap: MutableMap<Pair<String, String>, DB_dc_sub_info> = mutableMapOf(Pair("","") to DB_dc_sub_info())
-    var dbDcSubHwMap: MutableMap<Pair<String, String>, DB_dc_sub_hw> = mutableMapOf(Pair("","") to DB_dc_sub_hw())
-    var dbDcSubTestMap: MutableMap<Pair<String, String>, DB_dc_sub_test> = mutableMapOf(Pair("","") to DB_dc_sub_test())
-    var dbDcSubNotiMap: MutableMap<Pair<String, String>, DB_dc_sub_noti> = mutableMapOf(Pair("","") to DB_dc_sub_noti())
+    var dbDcSubHwMap: MutableMap<String, ArrayList<DB_dc_sub_hw>> = mutableMapOf("" to ArrayList<DB_dc_sub_hw>())
+    var dbDcSubTestMap: MutableMap<String, ArrayList<DB_dc_sub_test>> = mutableMapOf("" to ArrayList<DB_dc_sub_test>())
+    var dbDcSubNotiMap: MutableMap<String, ArrayList<DB_dc_sub_noti>> = mutableMapOf("" to ArrayList<DB_dc_sub_noti>())
 
     fun initMap(){
         //dbDcStdInfoMap
@@ -235,11 +235,16 @@ object DBInfoManager {
                     "DB test",temp.sub + "   /  " + temp.code + "  /   " + temp.hw_name + "  /   " + temp.date
                 )
 
-                val pair = Pair(temp.code, temp.sub)
-                dbDcSubHwMap.put(pair, temp)
+                if(!dbDcSubHwMap.containsKey(temp.code)){
+                    dbDcSubHwMap.put(temp.code, arrayListOf<DB_dc_sub_hw>(temp))
+                }
+                else{
+                    dbDcSubHwMap.getValue(temp.code).add(temp)
+                }
             }
             resultSet.close();
             statement.close();
+
         } catch (e: Exception){
             //
         }
@@ -266,8 +271,13 @@ object DBInfoManager {
                     "DB test",temp.sub + "   /  " + temp.code + "  /   " + temp.test_name + "  /   " + temp.date
                 )
 
-                val pair = Pair(temp.code, temp.sub)
-                dbDcSubTestMap.put(pair, temp)
+                if(!dbDcSubTestMap.containsKey(temp.code)){
+                    dbDcSubTestMap.put(temp.code, arrayListOf<DB_dc_sub_test>(temp))
+                }
+                else{
+                    dbDcSubTestMap.getValue(temp.code).add(temp)
+                }
+
             }
             resultSet.close();
             statement.close();
@@ -295,21 +305,18 @@ object DBInfoManager {
                 temp.written = resultSet.getString("SUB_NOTI_WRITTEN")
                 temp.cont = resultSet.getString("SUB_NOTI_CONT")
                 temp.date = resultSet.getString("SUB_NOTI_DATE").trim()
-                if(true) Log.d(
-                    "DB test",temp.code
-                            + "  /   " + temp.sub
-                            + "  /   " + temp.title
-                            + "  /   " + temp.written
-                            + "  /   " + temp.cont
-                            + "  /   " + temp.date
 
-                )
 
-                val pair = Pair(temp.code, temp.sub)
-                dbDcSubNotiMap.put(pair, temp)
+                if(!dbDcSubNotiMap.containsKey(temp.code)){
+                    dbDcSubNotiMap.put(temp.code, arrayListOf<DB_dc_sub_noti>(temp))
+                }
+                else{
+                    dbDcSubNotiMap.getValue(temp.code).add(temp)
+                }
             }
             resultSet.close();
             statement.close();
+
         } catch (e: Exception){
             //
         }
