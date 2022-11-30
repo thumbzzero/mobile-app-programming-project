@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".common.LmsMenuActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/courseName"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="모바일앱프로그래밍1"
+        android:background="@color/knu_purple"
+        android:padding="85dp"
+        android:textColor="@color/knu_title"
+        android:textSize="@dimen/knu_title_size"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginBottom="20dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/menu_notification"
+        style="@style/dashboard_menu_layout">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:src="@drawable/menu_notification" />
+        <TextView
+            style="@style/dashboard_box"
+            android:layout_gravity="center_vertical"
+            android:text="공지" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_textbook"
+        style="@style/dashboard_menu_layout">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:src="@drawable/menu_textbook" />
+        <TextView
+            style="@style/dashboard_box"
+            android:layout_gravity="center_vertical"
+            android:text="강의자료실" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_homework"
+        style="@style/dashboard_menu_layout">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:src="@drawable/menu_homework" />
+        <TextView
+            style="@style/dashboard_box"
+            android:layout_gravity="center_vertical"
+            android:text="과제" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_attendance"
+        style="@style/dashboard_menu_layout">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:src="@drawable/menu_attendance" />
+        <TextView
+            style="@style/dashboard_box"
+            android:layout_gravity="center_vertical"
+            android:text="스마트출결" />
+    </LinearLayout>
+
+</LinearLayout>
