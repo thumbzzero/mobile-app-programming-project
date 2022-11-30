@@ -47,18 +47,8 @@ object DBManager {
     }
 
     /** get subject homework info (by subject code and name)*/
-    fun getSUBHW(subjectCODE: String): ArrayList<DB_dc_sub_hw>{
-        for(it in DBInfoManager.dbDcSubHwMap){
-            if(it.key == subjectCODE)
-                return it.value
-        }
-
-        return arrayListOf()
-    }
-
-    /** get subject term test info (by subject code and name)*/
-    fun getSUBTEST(subjectCODE: String): ArrayList<DB_dc_sub_test>{
-        for(it in DBInfoManager.dbDcSubTestMap){
+    fun getSUBHWTEST(subjectCODE: String): ArrayList<DB_dc_sub_hwtest>{
+        for(it in DBInfoManager.dbDcSubHwTestMap){
             if(it.key == subjectCODE)
                 return it.value
         }
