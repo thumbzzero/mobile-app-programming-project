@@ -55,7 +55,7 @@ object DBConnectManager{
 
         if (DEBUGMODE) Log.e(tagERR, "DB Init Setting start!")
 
-        url = "jdbc:mysql://database-1.cufw1avtqftd.ap-northeast-2.rds.amazonaws.com:3306/myproject?"
+        url = "jdbc:mysql://database-3.cufw1avtqftd.ap-northeast-2.rds.amazonaws.com:3306/myproject?"
                                                                 /* localhost 대신 127.0.0.1 사용 가능
                                                                 * 3308(기본 3306) : 설치 시 지정한 포트 번호
                                                                 * 맨 뒤 : 연결 할 DB 이름 */
