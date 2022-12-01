@@ -2,17 +2,14 @@ package com.example.mobileappproject.common
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.mobileappproject.databinding.FragmentLmsMainBinding
-import com.example.mobileappproject.DBManager.DBConnectManager
+import androidx.fragment.app.Fragment
 import com.example.mobileappproject.DBManager.DBInfoManager
 import com.example.mobileappproject.DBManager.DBManager
 import com.example.mobileappproject.DBManager.DB_dc_std_course_info
-import com.example.mobileappproject.R
-import com.example.mobileappproject.databinding.ActivityMainBinding
+import com.example.mobileappproject.databinding.FragmentLmsMainBinding
 
 
 class LmsMainFragment : Fragment() {
@@ -25,15 +22,28 @@ class LmsMainFragment : Fragment() {
 
         studentId = "2016168188"  // 학번 동적으로 수정
         stuCourses = DBManager.getSTDCOS(studentId)
-
+        // Log.d("kkang", "${stuCourses}")
         course = ArrayList<String>()
         for (it in DBInfoManager.dbDcStdCourseInfoMap) {
+            Log.d("kkang", "${it.value}")
             if (it.key.second.length > 1) {
-                course.add(it.key.second)
+                //course.add(it.key.second)
+                course.add(it.value.sub)
             }
         }
-         // Log.d("course", "${course}")
-
+        // Log.d("course", "${course}")
+//        val binding = FragmentLmsMainBinding.inflate(layoutInflater)
+//        val menuBinding = ActivityLmsMenuBinding.inflate(layoutInflater)
+//        binding.goBtn1.setOnClickListener {
+//            Log.d("kkang", "onclickcourse1")
+//            //Log.d("kkang", "onClickCourse1")
+//            activity?.let {
+//                val intent = Intent(context, LmsMenuActivity::class.java)
+//                var courseName = binding.courseName1.text
+//                menuBinding.courseName.text = courseName
+//                startActivity(intent)
+//            }
+//        }
     }
 
     override fun onCreateView(

@@ -38,6 +38,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn1"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
@@ -52,6 +53,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn2"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
@@ -66,6 +68,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn3"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
@@ -80,6 +83,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn4"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
@@ -94,6 +98,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn5"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
@@ -108,6 +113,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn6"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
@@ -122,6 +128,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn7"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
@@ -136,6 +143,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn8"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
@@ -150,6 +158,7 @@
         <View
             style="@style/dashboard_course_view" />
         <Button
+            android:id="@+id/goBtn9"
             style="@style/dashboard_course_btn" />
     </LinearLayout>
 
