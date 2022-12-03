@@ -57,7 +57,7 @@ object DBConnectManager{
 
         if (DEBUGMODE) Log.e(tagERR, "DB Init Setting start!")
 
-        url = "jdbc:mysql://database-5.cufw1avtqftd.ap-northeast-2.rds.amazonaws.com:3306/myproject?"
+        url = "jdbc:mysql://database-6.cufw1avtqftd.ap-northeast-2.rds.amazonaws.com:3306/myproject?"
                                                                 /* localhost 대신 127.0.0.1 사용 가능
                                                                 * 3308(기본 3306) : 설치 시 지정한 포트 번호
                                                                 * 맨 뒤 : 연결 할 DB 이름 */
@@ -75,11 +75,11 @@ object DBConnectManager{
 			  * uid : MySQL DB의 접속 계정 (사용자아이디)
 			  * upw : MySQL DB의 접속 비밀번호 (인증코드) */
 
-        //uid = "eotjd0508"
-        //upw = "Random34734!"
+        uid = "eotjd0508"
+        upw = "Random34734!"
 
-        uid = "root"
-        upw = "1234"
+        //uid = "root"
+        //upw = "1234"
 
         if (DEBUGMODE) Log.e(tagERR, "DB Init Setting end!")
     }
