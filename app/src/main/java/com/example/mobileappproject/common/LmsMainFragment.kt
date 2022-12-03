@@ -87,16 +87,84 @@ class LmsMainFragment : Fragment() {
             }
 
         }
-        //val menuBinding = ActivityLmsMenuBinding.inflate(inflater,container,false)
-        //val menuBinding = ActivityLmsMenuBinding.inflate(layoutInflater)
+
         binding.goBtn1.setOnClickListener {
-            //Log.d("kkang", "onClickCourse1")
             activity?.let {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName1.text
                 Log.d("kkang", "${courseName}")
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
-                //menuBinding.courseName.text = "${courseName}"
+                startActivity(intent)
+            }
+        }
+
+        binding.goBtn2.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName2.text
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
+                startActivity(intent)
+            }
+        }
+
+        binding.goBtn3.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName3.text
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
+                startActivity(intent)
+            }
+        }
+
+        binding.goBtn4.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName4.text
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
+                startActivity(intent)
+            }
+        }
+
+        binding.goBtn5.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName5.text
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
+                startActivity(intent)
+            }
+        }
+
+        binding.goBtn6.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName6.text
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
+                startActivity(intent)
+            }
+        }
+        binding.goBtn7.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName7.text
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
+                startActivity(intent)
+            }
+        }
+
+        binding.goBtn8.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName8.text
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
+                startActivity(intent)
+            }
+        }
+
+        binding.goBtn9.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName9.text
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
                 startActivity(intent)
             }
         }
