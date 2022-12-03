@@ -1,18 +1,24 @@
 package com.example.mobileappproject.common
 
-import android.media.Image
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileappproject.DBManager.DBManager
+import com.example.mobileappproject.DBManager.DB_dc_sub_noti
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityLmsNoticeBinding
 import com.example.mobileappproject.databinding.LmsNoticeDataBinding
-import com.example.mobileappproject.databinding.NoticeDataBinding
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 class LmsNoticeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,17 +38,31 @@ class LmsNoticeActivity : AppCompatActivity() {
         val datasWeek = mutableListOf<LmsNotice>()
         val datasMonth = mutableListOf<LmsNotice>()
 
-        //todo 데이터 db에서 동적으로 가져오기
-        /*
-        for(i in x){
-            if(오늘)datasDay.add
-            elseif(이번주)datasWeek.add
-        }
-        */
 
-        datasDay.add(LmsNotice("테스트1","작성자1","본문","2022/02/00"))
-        datasWeek.add(LmsNotice("테스트2","작성자1","본문","2022/02/00"))
-        datasMonth.add(LmsNotice("테스트3","작성자1","본문","2022/02/00"))
+        //todo 데이터 db에서 동적으로 가져오기
+        val list = DBManager.getSUBNOTI("CLTR0011-001")
+
+        val now = LocalDate.now()
+
+        for(item in list){
+            val day=LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
+            Log.d("test","오늘날짜$now ,공지날짜$day")
+            when{
+                now.isEqual(day) ->{
+                    datasDay.add(LmsNotice(item.title,item.written,item.cont,item.date))
+                }
+                now.minusDays(7).isBefore(day)->{
+                    datasWeek.add(LmsNotice(item.title,item.written,item.cont,item.date))
+                }
+                else-> {
+                    datasMonth.add(LmsNotice(item.title, item.written, item.cont, item.date))
+                }
+            }
+        }
+        if(datasDay.isEmpty()) binding.foldd.visibility=View.GONE
+        if(datasWeek.isEmpty()) binding.foldw.visibility=View.GONE
+        if(datasMonth.isEmpty()) binding.foldm.visibility=View.GONE
+
         //--------------
 
 

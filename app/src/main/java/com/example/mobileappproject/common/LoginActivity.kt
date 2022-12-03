@@ -50,6 +50,8 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("test","id=$id pw=$pw")
                 bufferWriter.close()
 
+                Student.stdInfo=temp
+                Student.stdCourseInfo=DBManager.getSTDCOS(Student.stdInfo.sid)
 
                 finish()
                 overridePendingTransition(R.anim.none,R.anim.none)
