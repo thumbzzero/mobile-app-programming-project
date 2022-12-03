@@ -32,6 +32,9 @@
             android:src="@drawable/menu_notification" />
         <TextView
             style="@style/dashboard_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
             android:layout_gravity="center_vertical"
             android:text="공지" />
     </LinearLayout>
@@ -47,6 +50,9 @@
             android:src="@drawable/menu_textbook" />
         <TextView
             style="@style/dashboard_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
             android:layout_gravity="center_vertical"
             android:text="강의자료실" />
     </LinearLayout>
@@ -62,6 +68,9 @@
             android:src="@drawable/menu_homework" />
         <TextView
             style="@style/dashboard_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
             android:layout_gravity="center_vertical"
             android:text="과제" />
     </LinearLayout>
@@ -77,6 +86,9 @@
             android:src="@drawable/menu_attendance" />
         <TextView
             style="@style/dashboard_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
             android:layout_gravity="center_vertical"
             android:text="스마트출결" />
     </LinearLayout>
