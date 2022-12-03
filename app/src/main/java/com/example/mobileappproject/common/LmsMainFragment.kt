@@ -15,24 +15,25 @@ import com.example.mobileappproject.databinding.FragmentLmsMainBinding
 
 class LmsMainFragment : Fragment() {
     lateinit var studentId: String
-    lateinit var stuCourses: ArrayList<DB_dc_std_course_info>
+    var stuCourses: ArrayList<DB_dc_std_course_info>? = null
     lateinit var course: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        studentId = "2016168188"  // 학번 동적으로 수정
-        stuCourses = DBManager.getSTDCOS(studentId)
+        stuCourses = Student.stdCourseInfo
         // Log.d("kkang", "${stuCourses}")
         course = ArrayList<String>()
-        for (it in DBInfoManager.dbDcStdCourseInfoMap) {
-            Log.d("kkang", "${it.value}")
-            if (it.key.second.length > 1 && it.key.first == studentId) {
-                //course.add(it.key.second)
-                course.add(it.value.sub)
+        if(stuCourses !=null){
+            Log.d("test","stucoure 받아와서 리스트에 추가")
+            for(it in stuCourses!!){
+                course.add(it.sub)
             }
+        }else{
+            Log.d("test","stucoure null임")
         }
-        // Log.d("course", "${course}")
+
+
     }
 
     override fun onCreateView(
@@ -40,7 +41,6 @@ class LmsMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentLmsMainBinding.inflate(inflater,container,false)
-
         //Log.d("course", "course.size: ${course.size}")
 
         for (i in 1 .. course.size) {

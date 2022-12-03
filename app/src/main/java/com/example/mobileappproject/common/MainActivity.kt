@@ -18,8 +18,8 @@ import java.io.File
 import java.io.FileReader
 
 object Student{
-    lateinit var stdInfo:DB_dc_std_info
-    lateinit var stdCourseInfo:ArrayList<DB_dc_std_course_info>
+    var stdInfo:DB_dc_std_info? = null
+    var stdCourseInfo: ArrayList<DB_dc_std_course_info>? = null
 }
 class MainActivity : AppCompatActivity() {
     lateinit var fragment1: LmsMainFragment
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             }else{
                 Log.d("test","From file id=$id, pw=$pw =>login"+temp)
                 Student.stdInfo=temp
-                Student.stdCourseInfo=DBManager.getSTDCOS(Student.stdInfo.sid)
+                Student.stdCourseInfo=DBManager.getSTDCOS(Student.stdInfo!!.sid)
             }
 
         }
@@ -76,8 +76,10 @@ class MainActivity : AppCompatActivity() {
 
         if(!isLogined){
             val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent,1234)
+            //super.onStop()
         }
+
 
 
         super.onCreate(savedInstanceState)
@@ -90,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = binding.navView
         fragmentManger=  supportFragmentManager
 
-        changeFragment(initPageIndex,true)
+        if(isLogined)changeFragment(initPageIndex,true)
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_menu1 -> {
@@ -171,4 +173,12 @@ class MainActivity : AppCompatActivity() {
 
         super.onBackPressed()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==1234 && resultCode== RESULT_OK){
+            changeFragment(1,true)
+        }
+    }
+
 }

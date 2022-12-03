@@ -55,9 +55,9 @@ class LoginActivity : AppCompatActivity() {
                 bufferWriter.close()
 
                 Student.stdInfo=temp
-                Student.stdCourseInfo=DBManager.getSTDCOS(Student.stdInfo.sid)
-
-                finish()
+                Student.stdCourseInfo=DBManager.getSTDCOS(Student.stdInfo!!.sid)
+                setResult(RESULT_OK)
+                finish()//todo 메인액티비티에서 변경해야할값 fragment1에 넘겨줘야함
                 overridePendingTransition(R.anim.none,R.anim.none)
             }else{
                 Toast.makeText(this, "아이디와 비밀번호를 확인하세요", Toast.LENGTH_SHORT).show()
