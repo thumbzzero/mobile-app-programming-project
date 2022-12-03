@@ -32,8 +32,9 @@ class CalenderFragment : Fragment() {
 
         binding = FragmentCalenderBinding.inflate(inflater,container,false)
         binding2 = DBManager
-        studentId= "2016168188"  // 학번 동적으로 수정
+        //studentId= "2016168188"  // 학번 동적으로 수정
         stuCourses = DBManager.getSTDCOS(studentId)
+        studentId=Student.stdInfo.id
         var notday:Int=7
         val textCalender = binding.tvDate
         //val today= LocalDateTime.now()
