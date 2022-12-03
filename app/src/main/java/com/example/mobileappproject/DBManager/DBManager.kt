@@ -1,7 +1,7 @@
 package com.example.mobileappproject.DBManager
 
 object DBManager {
-    private val DEBUGMODE = false
+    private val DEBUGMODE = true
 
     /** get student info (by login id & pw)*/
     fun getSTDINFO(studentID: String, studentPW: String): DB_dc_std_info{
@@ -35,7 +35,7 @@ object DBManager {
         return list
     }
 
-    /** get subject info (bu subject key number)*/
+    /** get subject info (bu subject code)*/
     fun getSUBINFO(subjectCODE: String): ArrayList<DB_dc_sub_info>{
         var list = ArrayList<DB_dc_sub_info>()
         for(it in DBInfoManager.dbDcSubInfoMap){
@@ -46,7 +46,7 @@ object DBManager {
         return list
     }
 
-    /** get subject homework info (by subject code and name)*/
+    /** get subject homework info (by subject code)*/
     fun getSUBHWTEST(subjectCODE: String): ArrayList<DB_dc_sub_hwtest>{
         for(it in DBInfoManager.dbDcSubHwTestMap){
             if(it.key == subjectCODE)
@@ -56,7 +56,7 @@ object DBManager {
         return arrayListOf()
     }
 
-    /** get subject notification (by subject code and name)*/
+    /** get subject notification (by subject code)*/
     fun getSUBNOTI(subjectCODE: String): ArrayList<DB_dc_sub_noti>{
         for(it in DBInfoManager.dbDcSubNotiMap){
             if(it.key == subjectCODE)
@@ -65,4 +65,15 @@ object DBManager {
 
         return arrayListOf()
     }
+
+    /** get subject lecture material (by subject code)*/
+    fun getSUBLECMAT(subjectCODE: String): ArrayList<DB_dc_sub_lecmat>{
+        for(it in DBInfoManager.dbDcSubLecmatMap){
+            if(it.key == subjectCODE)
+                return it.value
+        }
+
+        return arrayListOf()
+    }
+
 }

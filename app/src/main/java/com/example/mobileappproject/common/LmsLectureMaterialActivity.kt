@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileappproject.DBManager.DBManager
+import com.example.mobileappproject.DataManager.LoginData
 import com.example.mobileappproject.databinding.ActivityLmsLectureMaterialBinding
 import com.example.mobileappproject.databinding.LmsLecturematerialDataBinding
 import com.example.mobileappproject.databinding.LmsNoticeDataBinding
@@ -19,6 +21,11 @@ class LmsLectureMaterialActivity : AppCompatActivity() {
         val binding = ActivityLmsLectureMaterialBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setTitle("강의자료")
+
+        //recieve data from DB
+        val studentSID = DBManager.getSTDINFO(LoginData.id, LoginData.pw).sid
+        val lecmat = DBManager.getSUBLECMAT(studentSID)
+
 
         val datas = mutableListOf<LmsLectureMaterial>()
         for(i in 1.. 10){
