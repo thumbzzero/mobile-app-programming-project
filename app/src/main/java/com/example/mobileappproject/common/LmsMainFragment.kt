@@ -27,7 +27,7 @@ class LmsMainFragment : Fragment() {
         course = ArrayList<String>()
         for (it in DBInfoManager.dbDcStdCourseInfoMap) {
             Log.d("kkang", "${it.value}")
-            if (it.key.second.length > 1) {
+            if (it.key.second.length > 1 && it.key.first == studentId) {
                 //course.add(it.key.second)
                 course.add(it.value.sub)
             }

@@ -10,14 +10,16 @@ object DBConnectManager{
     lateinit var url: String
     lateinit var uid: String
     lateinit var upw: String
-    val tagERR = "DB test"
+    val tagERR = "DBtest"
 
 
     @JvmStatic
     fun connection(){
-        if(DEBUGMODE) Log.e(tagERR, "DB connection start")
+        if(DEBUGMODE) Log.e(tagERR, "DB connection init start")
 
         initSetting()
+
+        if(DEBUGMODE) Log.e(tagERR, "DB connection init end")
 
         if(DEBUGMODE) Log.e(tagERR, "DB Connecting start!")
         //jdbc8이상을 사용할 경우 "com.mysql.cj.jdbc.Driver"을 사용해야함.
@@ -55,7 +57,7 @@ object DBConnectManager{
 
         if (DEBUGMODE) Log.e(tagERR, "DB Init Setting start!")
 
-        url = "jdbc:mysql://database-3.cufw1avtqftd.ap-northeast-2.rds.amazonaws.com:3306/myproject?"
+        url = "jdbc:mysql://database-5.cufw1avtqftd.ap-northeast-2.rds.amazonaws.com:3306/myproject?"
                                                                 /* localhost 대신 127.0.0.1 사용 가능
                                                                 * 3308(기본 3306) : 설치 시 지정한 포트 번호
                                                                 * 맨 뒤 : 연결 할 DB 이름 */

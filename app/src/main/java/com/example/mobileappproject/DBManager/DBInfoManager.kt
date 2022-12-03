@@ -46,6 +46,15 @@ data class DB_dc_sub_noti(
     var date: String = "",  //일자         SUB_NOTI_DATEE
 )
 
+data class DB_dc_sub_lecmat(
+    var seq: Int = 0,
+    var code: String = "",
+    var sub: String = "",
+    var title: String = "",
+    var subtitle: String = "",
+    var ischecked: Boolean = false
+)
+
 object DBInfoManager {
     private val DEBUGMODE = false
 
@@ -54,6 +63,7 @@ object DBInfoManager {
     var dbDcSubInfoMap: MutableMap<Pair<String, String>, DB_dc_sub_info> = mutableMapOf(Pair("","") to DB_dc_sub_info())
     var dbDcSubHwTestMap: MutableMap<String, ArrayList<DB_dc_sub_hwtest>> = mutableMapOf("" to ArrayList<DB_dc_sub_hwtest>())
     var dbDcSubNotiMap: MutableMap<String, ArrayList<DB_dc_sub_noti>> = mutableMapOf("" to ArrayList<DB_dc_sub_noti>())
+    var dbDcSubLecmatMap: MutableMap<String, ArrayList<DB_dc_sub_lecmat>> = mutableMapOf("" to ArrayList<DB_dc_sub_lecmat>())
 
     fun initMap(){
         //dbDcStdInfoMap
@@ -65,11 +75,24 @@ object DBInfoManager {
             get_SUBINFO_Table()
             get_SUBHWTEST_Table()
             get_SUBNOTI_Table()
+            get_SUBLECMAT_Table()
 
         }catch (e: Exception){
             e.printStackTrace()
         }
 
+    }
+
+    private fun get_factory(tableName: String): ResultSet{
+        val statement: Statement
+        statement = DBConnectManager.conn.createStatement()
+        val resultSet: ResultSet
+        resultSet = statement.executeQuery(
+            "select * from myproject.${tableName} sit "
+        )
+        statement.close()
+
+        return resultSet
     }
 
     private fun get_STDINFO_Table(){
@@ -224,7 +247,7 @@ object DBInfoManager {
                 temp.date = resultSet.getString("SUB_DATE")
                 temp.cri = resultSet.getString("SUB_CRI").trim()
                 if(DEBUGMODE) Log.d(
-                    "DB test",temp.sub + "   /  " + temp.code + "  /   " + temp.cont + "  /   " + temp.date + "  /   " + temp.cri
+                    "DBtest",temp.sub + "   /  " + temp.code + "  /   " + temp.cont + "  /   " + temp.date + "  /   " + temp.cri
                 )
 
                 if(!dbDcSubHwTestMap.containsKey(temp.code)){
@@ -245,13 +268,14 @@ object DBInfoManager {
 
     private fun get_SUBNOTI_Table(){
         try{
+            val tableName = "SUB_NOTI_TB"
+
             val statement: Statement
             statement = DBConnectManager.conn.createStatement()
             val resultSet: ResultSet
             resultSet = statement.executeQuery(
-                "select * from myproject.SUB_NOTI_TB sit "
+                "select * from myproject.${tableName} sit "
             )
-
             while (resultSet.next()) {
                 var temp: DB_dc_sub_noti = DB_dc_sub_noti()
 
@@ -261,7 +285,7 @@ object DBInfoManager {
                 temp.title = resultSet.getString("SUB_NOTI_TITLE")
                 temp.written = resultSet.getString("SUB_NOTI_WRITTEN")
                 temp.cont = resultSet.getString("SUB_NOTI_CONT")
-                temp.date = resultSet.getString("SUB_NOTI_DATE").trim()
+                temp.date = resultSet.getString("SUB_NOTI_DATE")
 
 
                 if(!dbDcSubNotiMap.containsKey(temp.code)){
@@ -272,7 +296,43 @@ object DBInfoManager {
                 }
             }
             resultSet.close();
-            statement.close();
+            statement.close()
+
+        } catch (e: Exception){
+            //
+        }
+    }
+    private fun get_SUBLECMAT_Table(){
+        try{
+            val tableName = "SUB_LECMAT_TB"
+
+            val statement: Statement
+            statement = DBConnectManager.conn.createStatement()
+            val resultSet: ResultSet
+            resultSet = statement.executeQuery(
+                "select * from myproject.${tableName} sit "
+            )
+
+            while (resultSet.next()) {
+                var temp: DB_dc_sub_lecmat = DB_dc_sub_lecmat()
+
+                temp.seq = resultSet.getInt("SUB_LECMAT_SEQ")
+                temp.code = resultSet.getString("SUB_CODE")
+                temp.sub = resultSet.getString("SUB_NAME")
+                temp.title = resultSet.getString("SUB_LECMAT_TITLE")
+                temp.subtitle = resultSet.getString("SUB_LECMAT_SUBTITLE")
+                temp.ischecked = resultSet.getBoolean("SUB_LECMAT_ISCHECKED")
+
+
+                if(!dbDcSubLecmatMap.containsKey(temp.code)){
+                    dbDcSubLecmatMap.put(temp.code, arrayListOf<DB_dc_sub_lecmat>(temp))
+                }
+                else{
+                    dbDcSubLecmatMap.getValue(temp.code).add(temp)
+                }
+            }
+            resultSet.close()
+            statement.close()
 
         } catch (e: Exception){
             //
