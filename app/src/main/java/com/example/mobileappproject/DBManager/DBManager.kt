@@ -1,7 +1,7 @@
 package com.example.mobileappproject.DBManager
 
 object DBManager {
-    private val DEBUGMODE = false
+    private val DEBUGMODE = true
 
     /** get student info (by login id & pw)*/
     fun getSTDINFO(studentID: String, studentPW: String): DB_dc_std_info{
