@@ -1,5 +1,6 @@
 package com.example.mobileappproject.common
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,18 +33,6 @@ class LmsMainFragment : Fragment() {
             }
         }
         // Log.d("course", "${course}")
-//        val binding = FragmentLmsMainBinding.inflate(layoutInflater)
-//        val menuBinding = ActivityLmsMenuBinding.inflate(layoutInflater)
-//        binding.goBtn1.setOnClickListener {
-//            Log.d("kkang", "onclickcourse1")
-//            //Log.d("kkang", "onClickCourse1")
-//            activity?.let {
-//                val intent = Intent(context, LmsMenuActivity::class.java)
-//                var courseName = binding.courseName1.text
-//                menuBinding.courseName.text = courseName
-//                startActivity(intent)
-//            }
-//        }
     }
 
     override fun onCreateView(
@@ -97,6 +86,19 @@ class LmsMainFragment : Fragment() {
 
             }
 
+        }
+        //val menuBinding = ActivityLmsMenuBinding.inflate(inflater,container,false)
+        //val menuBinding = ActivityLmsMenuBinding.inflate(layoutInflater)
+        binding.goBtn1.setOnClickListener {
+            //Log.d("kkang", "onClickCourse1")
+            activity?.let {
+                val intent = Intent(context, LmsMenuActivity::class.java)
+                var courseName = binding.courseName1.text
+                Log.d("kkang", "${courseName}")
+                intent.putExtra("course_name","${courseName}") //데이터 넣기
+                //menuBinding.courseName.text = "${courseName}"
+                startActivity(intent)
+            }
         }
 
         return binding.root
