@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.mobileappproject.DBManager.DBConnectManager
 import com.example.mobileappproject.DBManager.DBManager
 import com.example.mobileappproject.DBManager.DBManager.getSTDINFO
+import com.example.mobileappproject.DataManager.LoginData
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityLoginBinding
 import java.io.BufferedWriter
@@ -33,6 +34,9 @@ class LoginActivity : AppCompatActivity() {
         binding.loginBtn.setOnClickListener {
             val id = binding.idTxt.text.toString()
             val pw = binding.passwordTxt.text.toString()
+
+            LoginData.id = id
+            LoginData.pw = pw
 
             val temp = DBManager.getSTDINFO(id, pw)
             if(temp.name!="null"){//로그인 성공시 , 로컬저장소에 파일로 id,pw저장
