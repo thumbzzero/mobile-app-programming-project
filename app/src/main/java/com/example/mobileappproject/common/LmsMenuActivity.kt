@@ -18,7 +18,7 @@ class LmsMenuActivity : AppCompatActivity() {
             //공지
             val intent = Intent(this, LmsNoticeActivity::class.java)
 
-            intent.putExtra("subjcetCode","CLTR0011-001")
+            intent.putExtra("course_code", "${course_code}")
             startActivity(intent)
         }
 

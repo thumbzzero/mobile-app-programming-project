@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.mobileappproject.DBManager.DBInfoManager
 import com.example.mobileappproject.DBManager.DBManager
@@ -90,96 +91,22 @@ class LmsMainFragment : Fragment() {
             }
 
         }
-
-        binding.goBtn1.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName1.text
-                Log.d("kkang", "${courseName}")
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[0]}")
-                startActivity(intent)
+        val btnAry = mutableListOf<Button>(binding.goBtn1,binding.goBtn2,binding.goBtn3,binding.goBtn4,
+            binding.goBtn5,binding.goBtn6,binding.goBtn7,binding.goBtn8,binding.goBtn9)
+        for(i in 0 .. course.size-1){
+            btnAry[i].setOnClickListener {
+                activity?.let {
+                    val intent = Intent(context, LmsMenuActivity::class.java)
+                    var courseName = course[i]
+                    Log.d("kkang", "${courseName}")
+                    intent.putExtra("course_name","${courseName}") //데이터 넣기
+                    intent.putExtra("course_code", "${course_code[i]}")
+                    startActivity(intent)
+                }
             }
         }
 
-        binding.goBtn2.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName2.text
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[1]}")
-                startActivity(intent)
-            }
-        }
 
-        binding.goBtn3.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName3.text
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[2]}")
-                startActivity(intent)
-            }
-        }
-
-        binding.goBtn4.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName4.text
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[3]}")
-                startActivity(intent)
-            }
-        }
-
-        binding.goBtn5.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName5.text
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[4]}")
-                startActivity(intent)
-            }
-        }
-
-        binding.goBtn6.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName6.text
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[5]}")
-                startActivity(intent)
-            }
-        }
-        binding.goBtn7.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName7.text
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[6]}")
-                startActivity(intent)
-            }
-        }
-
-        binding.goBtn8.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName8.text
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[7]}")
-                startActivity(intent)
-            }
-        }
-
-        binding.goBtn9.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, LmsMenuActivity::class.java)
-                var courseName = binding.courseName9.text
-                intent.putExtra("course_name","${courseName}") //데이터 넣기
-                intent.putExtra("course_code", "${course_code[8]}")
-                startActivity(intent)
-            }
-        }
 
         return binding.root
     }

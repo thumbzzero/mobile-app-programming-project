@@ -38,7 +38,7 @@ class LmsNoticeActivity : AppCompatActivity() {
         val datasWeek = mutableListOf<LmsNotice>()
         val datasMonth = mutableListOf<LmsNotice>()
 
-        val subjcetCode = intent.getStringExtra("subjcetCode")
+        val subjcetCode = intent.getStringExtra("course_code")
 
         //todo 데이터 db에서 동적으로 가져오기
         val list = DBManager.getSUBNOTI(subjcetCode!!)
