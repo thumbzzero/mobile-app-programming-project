@@ -190,7 +190,7 @@ class WeekAdapter(val datas: MutableList<WeekInfo>): RecyclerView.Adapter<Recycl
         binding.weekView.text=datas[position].views
         binding.mainText.text=datas[position].main_text
         if(!datas[position].main_text.equals("메인텍스트")) binding.siteBtn.visibility=View.VISIBLE
-
+        if(datas[position].views.equals("조회수임시")) binding.siteView.visibility=View.INVISIBLE
         binding.siteBtn.setOnClickListener {
             when(binding.mainText.visibility){
                 View.VISIBLE-> {
