@@ -13,8 +13,6 @@ class LmsMenuActivity : AppCompatActivity() {
         val course_name = intent.getStringExtra("course_name")
         binding.courseName.text = "${course_name}"
 
-        val subjcetCode = intent.getStringExtra("subjcetcode")//todo 가져오기
-
         binding.menuNotification.setOnClickListener {
             //공지
             val intent = Intent(this, LmsNoticeActivity::class.java)
@@ -36,7 +34,5 @@ class LmsMenuActivity : AppCompatActivity() {
         binding.menuAttendance.setOnClickListener {
             //스마트출결
         }
-
-
     }
 }
