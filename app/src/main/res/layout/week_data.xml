@@ -80,12 +80,37 @@
             android:text="제목" />
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/site_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/site_view_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/notice_views" />
+        <TextView
+            android:id="@+id/week_view"
+            android:textSize="15sp"
+            android:textColor="#444"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="조회수" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/site_btn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/unfold"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/main_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:visibility="gone" />
-
-
 </LinearLayout>
