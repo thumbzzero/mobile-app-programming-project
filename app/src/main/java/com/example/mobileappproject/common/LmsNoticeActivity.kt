@@ -40,7 +40,7 @@ class LmsNoticeActivity : AppCompatActivity() {
 
         val subjcetCode = intent.getStringExtra("course_code")
 
-        //todo 데이터 db에서 동적으로 가져오기
+
         val list = DBManager.getSUBNOTI(subjcetCode!!)
 
         val now = LocalDate.now()
@@ -134,7 +134,7 @@ class LmsNoticeAdapter(val datas: MutableList<LmsNotice>): RecyclerView.Adapter<
         binding.title.text = datas[position].title
         binding.date.text = datas[position].date
         binding.mainTxt.text=datas[position].mainTxt
-
+        binding.writter.text=datas[position].writter
 
         binding.data.setOnClickListener {
             //itemClickListener.OnClick(it, position)
