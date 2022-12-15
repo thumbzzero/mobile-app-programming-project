@@ -17,6 +17,7 @@ class LmsMainFragment : Fragment() {
     lateinit var studentId: String
     var stuCourses: ArrayList<DB_dc_std_course_info>? = null
     lateinit var course: ArrayList<String>
+    lateinit var course_code: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +25,12 @@ class LmsMainFragment : Fragment() {
         stuCourses = Student.stdCourseInfo
         // Log.d("kkang", "${stuCourses}")
         course = ArrayList<String>()
+        course_code = ArrayList<String>()
         if(stuCourses !=null){
             Log.d("test","stucoure 받아와서 리스트에 추가")
             for(it in stuCourses!!){
                 course.add(it.sub)
+                course_code.add(it.code)
             }
         }else{
             Log.d("test","stucoure null임")
@@ -94,6 +97,7 @@ class LmsMainFragment : Fragment() {
                 var courseName = binding.courseName1.text
                 Log.d("kkang", "${courseName}")
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[0]}")
                 startActivity(intent)
             }
         }
@@ -103,6 +107,7 @@ class LmsMainFragment : Fragment() {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName2.text
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[1]}")
                 startActivity(intent)
             }
         }
@@ -112,6 +117,7 @@ class LmsMainFragment : Fragment() {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName3.text
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[2]}")
                 startActivity(intent)
             }
         }
@@ -121,6 +127,7 @@ class LmsMainFragment : Fragment() {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName4.text
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[3]}")
                 startActivity(intent)
             }
         }
@@ -130,6 +137,7 @@ class LmsMainFragment : Fragment() {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName5.text
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[4]}")
                 startActivity(intent)
             }
         }
@@ -139,6 +147,7 @@ class LmsMainFragment : Fragment() {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName6.text
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[5]}")
                 startActivity(intent)
             }
         }
@@ -147,6 +156,7 @@ class LmsMainFragment : Fragment() {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName7.text
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[6]}")
                 startActivity(intent)
             }
         }
@@ -156,6 +166,7 @@ class LmsMainFragment : Fragment() {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName8.text
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[7]}")
                 startActivity(intent)
             }
         }
@@ -165,6 +176,7 @@ class LmsMainFragment : Fragment() {
                 val intent = Intent(context, LmsMenuActivity::class.java)
                 var courseName = binding.courseName9.text
                 intent.putExtra("course_name","${courseName}") //데이터 넣기
+                intent.putExtra("course_code", "${course_code[8]}")
                 startActivity(intent)
             }
         }

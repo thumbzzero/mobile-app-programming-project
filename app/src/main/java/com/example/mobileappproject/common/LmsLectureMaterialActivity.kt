@@ -21,15 +21,27 @@ class LmsLectureMaterialActivity : AppCompatActivity() {
         val binding = ActivityLmsLectureMaterialBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setTitle("강의자료")
+        val course_code = intent.getStringExtra("course_code")
 
         //recieve data from DB
-        val studentSID = DBManager.getSTDINFO(LoginData.id, LoginData.pw).sid
-        val lecmat = DBManager.getSUBLECMAT(studentSID)
+        val studentId = Student.stdInfo!!.id
+        val studentPw = Student.stdInfo!!.pw
+        val subjectCode = course_code
+
+        val studentInfo = DBManager.getSTDINFO(studentId, studentPw)
+        val studentSID = studentInfo.sid
+
+        val subjectLecMat = DBManager.getSUBLECMAT(subjectCode!!)
 
 
+        Log.e("DBtest2", " subjectLecMat.size : ${subjectLecMat.size}")
+        Log.e("DBtest2", " studentInfo : ${studentInfo}")
+        Log.e("DBtest2", " studentSID : ${studentSID}")
+        Log.e("DBtest2", " subjectCode : ${subjectCode}")
         val datas = mutableListOf<LmsLectureMaterial>()
-        for(i in 1.. 10){
-            datas.add(LmsLectureMaterial("$i", "$i"))
+
+        for(i in subjectLecMat){
+            datas.add(LmsLectureMaterial("${i.title}", "${i.subtitle}"))
         }
 
         binding.recyclerViewLectureMaterial.layoutManager = LinearLayoutManager(this)

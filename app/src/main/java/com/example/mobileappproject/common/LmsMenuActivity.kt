@@ -12,10 +12,12 @@ class LmsMenuActivity : AppCompatActivity() {
         val binding = ActivityLmsMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val course_name = intent.getStringExtra("course_name")
+        val course_code = intent.getStringExtra("course_code")
         binding.courseName.text = "${course_name}"
 
         binding.menuTextbook.setOnClickListener {
             val intent = Intent(this, LmsLectureMaterialActivity::class.java)
+            intent.putExtra("course_code", "${course_code}")
             startActivity(intent)
         }
     }
