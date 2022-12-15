@@ -3,17 +3,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:id="@+id/lecture_material_item_root"
+    android:id="@+id/message_item_root"
     android:background="@color/white"
     android:padding="10dp">
-
-    <ImageView
-        android:id="@+id/lecture_material_item_image"
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:src="@drawable/notice_star_on">
-    </ImageView>
-
     <LinearLayout
         android:layout_weight="3"
         android:layout_width="wrap_content"
@@ -22,7 +14,7 @@
         android:padding="2dp">
 
         <TextView
-            android:id="@+id/lecture_material_item_title"
+            android:id="@+id/message_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
@@ -31,27 +23,13 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/lecture_material_item_subtitle"
+            android:id="@+id/message_item_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/black"
             android:text="sub Title"
             android:textSize="10sp"/>
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_weight="1"
-        android:layout_width="20dp"
-        android:layout_height="match_parent"
-        android:padding="2dp">
-
-        <ImageView
-            android:id="@+id/lecture_material_item_ischecked"
-            android:src="@drawable/lecturematerial_dischecked_circle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></ImageView>
 
     </LinearLayout>
 

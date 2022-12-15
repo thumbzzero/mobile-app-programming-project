@@ -76,4 +76,22 @@ object DBManager {
         return arrayListOf()
     }
 
+    fun getSTDMESSAGE(recieveStudentSID: String): ArrayList<DB_dc_std_message>{
+        for(it in DBInfoManager.dbDcStdMessageMap){
+            if(it.key == recieveStudentSID)
+                return it.value
+        }
+
+        return arrayListOf()
+    }
+
+    fun sendSTDMESSAGE(sendStudentSID: String, recieveStudentSID: String,
+                       messageContent: String, messageModifyDate: String){
+
+        DBInfoManager.set_STDMessage_Table(
+            sendStudentSID, recieveStudentSID,
+            messageContent, messageModifyDate)
+
+    }
+
 }

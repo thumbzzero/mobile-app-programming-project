@@ -1,6 +1,5 @@
 package com.example.mobileappproject.DBManager
 
-import android.app.DownloadManager.Query
 import android.util.Log
 import java.sql.ResultSet
 import java.sql.Statement
@@ -55,6 +54,14 @@ data class DB_dc_sub_lecmat(
     var ischecked: Boolean = false
 )
 
+data class DB_dc_std_message(
+    var seq: Int = 0,
+    var sndsid: String = "",
+    var rcvsid: String = "",
+    var content: String = "",
+    var modif: String = ""
+)
+
 object DBInfoManager {
     private val DEBUGMODE = false
 
@@ -64,6 +71,7 @@ object DBInfoManager {
     var dbDcSubHwTestMap: MutableMap<String, ArrayList<DB_dc_sub_hwtest>> = mutableMapOf("" to ArrayList<DB_dc_sub_hwtest>())
     var dbDcSubNotiMap: MutableMap<String, ArrayList<DB_dc_sub_noti>> = mutableMapOf("" to ArrayList<DB_dc_sub_noti>())
     var dbDcSubLecmatMap: MutableMap<String, ArrayList<DB_dc_sub_lecmat>> = mutableMapOf("" to ArrayList<DB_dc_sub_lecmat>())
+    var dbDcStdMessageMap: MutableMap<String, ArrayList<DB_dc_std_message>> = mutableMapOf("" to ArrayList<DB_dc_std_message>())
 
     fun initMap(){
         //dbDcStdInfoMap
@@ -76,6 +84,7 @@ object DBInfoManager {
             get_SUBHWTEST_Table()
             get_SUBNOTI_Table()
             get_SUBLECMAT_Table()
+            get_STDMessage_Table()
 
         }catch (e: Exception){
             e.printStackTrace()
@@ -333,6 +342,66 @@ object DBInfoManager {
             }
             resultSet.close()
             statement.close()
+
+        } catch (e: Exception){
+            //
+        }
+    }
+
+    private fun get_STDMessage_Table(){
+        try{
+            val tableName = "STD_MES_TB"
+
+            val statement: Statement
+            statement = DBConnectManager.conn.createStatement()
+            val resultSet: ResultSet
+            resultSet = statement.executeQuery(
+                "select * from myproject.${tableName} sit "
+            )
+
+            while (resultSet.next()) {
+                var temp: DB_dc_std_message = DB_dc_std_message()
+
+                temp.seq = resultSet.getInt("MES_SEQ")
+                temp.sndsid = resultSet.getString("STD_SND_SID")
+                temp.rcvsid = resultSet.getString("STD_RCV_SID")
+                temp.content = resultSet.getString("MES_CONT")
+                temp.modif = resultSet.getString("MES_MODI")
+
+                if(!dbDcStdMessageMap.containsKey(temp.rcvsid)){
+                    dbDcStdMessageMap.put(temp.rcvsid, arrayListOf<DB_dc_std_message>(temp))
+                }
+                else{
+                    dbDcStdMessageMap.getValue(temp.rcvsid).add(temp)
+                }
+            }
+            resultSet.close()
+            statement.close()
+
+        } catch (e: Exception){
+            //
+        }
+
+    }
+
+    fun set_STDMessage_Table(sendStudentSID: String, recieveStudentSID: String,
+                             messageContent: String, messageModifyDate: String){
+        try{
+            val tableName = "STD_MES_TB"
+
+            val sendStudentSID = sendStudentSID
+            val recieveStudentSID = recieveStudentSID
+            val messageContent = messageContent
+            val messageModifyDate = messageModifyDate
+
+            val messageSEQ = DBManager.getSTDMESSAGE(recieveStudentSID).size
+
+            val statement: Statement
+            statement = DBConnectManager.conn.createStatement()
+            val resultSet: ResultSet
+            resultSet = statement.executeQuery(
+                "insert into myproject.${tableName} sit values(${sendStudentSID},${recieveStudentSID},${messageContent},${messageSEQ},${messageModifyDate})"
+            )
 
         } catch (e: Exception){
             //
