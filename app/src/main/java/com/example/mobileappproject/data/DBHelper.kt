@@ -23,6 +23,18 @@ class DBHelper(
                 + ")")
 
         db?.execSQL(sql)
+
+        val sql2 = ("create table WeekInfo("
+                + "title text primary key, "
+                + "date text not null, "
+                + "site text not null, "
+                + "views text not null, "
+                + "site_address text not null, "
+                + "main_text text not null"
+                + ")")
+
+        db?.execSQL(sql2)
+
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {

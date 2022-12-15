@@ -19,6 +19,17 @@ import kotlin.concurrent.thread
 
 
 class MoreNoticeFragment : Fragment() {
+    val CSE:List<String> = listOf("https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%9D%BC%EB%B0%98%EA%B3%B5%EC%A7%80",
+        "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%ED%95%99%EC%82%AC",
+        "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%9E%A5%ED%95%99,",
+        "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%8B%AC%EC%BB%B4",
+        "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EA%B8%80%EC%86%9D",
+        "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_3_a")
+    val CSENAME:List<String> = listOf("컴퓨터학부-일반공지","컴퓨터학부-학사공지","컴퓨터학부-장학","컴퓨터학부-심컴",
+        "컴퓨터학부-글솝","컴퓨터학부-학부인재")
+
+
+
     val datas = mutableListOf<NoticeInfo>()
     lateinit var recyclerView:RecyclerView
     val adapter:NoticeAdapter = NoticeAdapter(datas)
@@ -58,15 +69,7 @@ class MoreNoticeFragment : Fragment() {
 
 
     fun findNoticeLocal(){
-        val CSE:List<String> = listOf("https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%9D%BC%EB%B0%98%EA%B3%B5%EC%A7%80",
-            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%ED%95%99%EC%82%AC",
-            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%9E%A5%ED%95%99,",
-            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EC%8B%AC%EC%BB%B4",
-            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_1&sca=%EA%B8%80%EC%86%9D",
-            "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_3_a")
-        val CSENAME:List<String> = listOf("컴퓨터학부-일반공지","컴퓨터학부-학사공지","컴퓨터학부-장학","컴퓨터학부-심컴",
-            "컴퓨터학부-글솝","컴퓨터학부-학부인재")
-        Log.d("test","findNoticeLocal 호출")
+
         thread {
             val dbHelper = DBHelper(context,"localDB.db",null,1)
             val db = dbHelper.writableDatabase
@@ -103,7 +106,6 @@ class MoreNoticeFragment : Fragment() {
 
     }
     fun showDB(){
-        Log.d("test","showDB호출")
         datas.clear()
 
 
@@ -111,7 +113,16 @@ class MoreNoticeFragment : Fragment() {
         val dbHelper = DBHelper(context,"localDB.db",null,1)
         val db = dbHelper.writableDatabase
 
-        val sql ="SELECT * FROM NoticeInfo ORDER BY date DESC, views DESC"
+        //val sql ="SELECT * FROM NoticeInfo ORDER BY date DESC, views DESC"
+
+        var targetSite=""
+        if(true){//학과에 따라서 공지가져오기
+            for(it in CSENAME){
+                targetSite+="'"+it+"',"
+            }
+        }
+        targetSite+="'temp'"
+        val sql ="SELECT * FROM NoticeInfo WHERE SITE IN ($targetSite)ORDER BY date DESC, views DESC"
         val c =db.rawQuery(sql,null)
 
         while(c.moveToNext()){
@@ -131,7 +142,6 @@ class MoreNoticeFragment : Fragment() {
         }
 
         db.close()
-        Log.d("test","어뎁터 생성,${datas.size}")
 
 
         adapter.notifyDataSetChanged()
