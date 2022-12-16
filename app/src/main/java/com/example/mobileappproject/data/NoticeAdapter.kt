@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.NoticeDataBinding
 
 
@@ -24,7 +25,10 @@ class NoticeAdapter(val datas: MutableList<NoticeInfo>):RecyclerView.Adapter<Rec
         binding.noticeTitle.text=datas[position].title
         binding.noticeDate.text=datas[position].date
         binding.noticeView.text=datas[position].views
-
+        if(datas[position].site.equals("경북대학교-공지사항"))
+            binding.siteImg.setImageResource(R.drawable.knu_img)
+        else
+            binding.siteImg.setImageResource(R.drawable.cse_img)
         binding.data.setOnClickListener {
             itemClickListener.OnClick(it,position)
         }

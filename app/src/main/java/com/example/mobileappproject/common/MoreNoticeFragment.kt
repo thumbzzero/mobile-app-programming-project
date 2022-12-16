@@ -27,7 +27,8 @@ class MoreNoticeFragment : Fragment() {
         "https://computer.knu.ac.kr/bbs/board.php?bo_table=sub5_3_a")
     val CSENAME:List<String> = listOf("컴퓨터학부-일반공지","컴퓨터학부-학사공지","컴퓨터학부-장학","컴퓨터학부-심컴",
         "컴퓨터학부-글솝","컴퓨터학부-학부인재")
-
+    val KNU:List<String> = listOf("https://www.knu.ac.kr/wbbs/wbbs/bbs/btin/list.action?bbs_cde=1&menu_idx=67")
+    val KNUNAME:List<String> = listOf("경북대학교-공지사항")
 
 
     val datas = mutableListOf<NoticeInfo>()
@@ -86,13 +87,42 @@ class MoreNoticeFragment : Fragment() {
                         val views = elem.select("td.td_num.hidden-xs").text()
                         val site = CSENAME[i]
                         val arg = arrayOf<String>(title,date,site,views,pageUrl)
-
                         try {
                             db.execSQL(sql,arg)
-                        }catch (e:Exception){}
+                        }catch (e:Exception){
+                            Log.d("test","title:$title, view:$views")
+                            val s = "UPDATE NoticeInfo set views = ? where title = ? "
+                            val a = arrayOf<String>(title,views)
+                            db.execSQL(s,a)
+                        }
 
                     }
                 }
+
+                for(i in 0..KNU.size-1){
+                    val doc = Jsoup.connect(KNU[i])
+                        .get()
+                    val element = doc.select("tbody tr")
+                    for (elem in element){
+                        val title = elem.select("a").first().text()
+                        val pageUrl = elem.select("a").attr("abs:href")
+                        val date = elem.select("td.date").text()
+                        val views = elem.select("td.hit").text()
+                        val site = KNUNAME[i]
+                        val arg = arrayOf<String>(title,date,site,views,pageUrl)
+                        try {
+                            db.execSQL(sql,arg)
+                        }catch (e:Exception){
+                            val s = "UPDATE NoticeInfo set views = ? where title = ? "
+                            val a = arrayOf<String>(views,title)
+                            db.execSQL(s,a)
+                        }
+
+                    }
+                }
+
+
+
 
 
 
@@ -121,8 +151,8 @@ class MoreNoticeFragment : Fragment() {
                 targetSite+="'"+it+"',"
             }
         }
-        targetSite+="'temp'"
-        val sql ="SELECT * FROM NoticeInfo WHERE SITE IN ($targetSite)ORDER BY date DESC, views DESC"
+        targetSite+="'경북대학교-공지사항'"
+        val sql ="SELECT * FROM NoticeInfo WHERE SITE IN ($targetSite)ORDER BY date DESC, views ASC"
         val c =db.rawQuery(sql,null)
 
         while(c.moveToNext()){
