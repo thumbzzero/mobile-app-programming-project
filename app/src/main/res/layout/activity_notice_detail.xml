@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoticeDetailActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/knu_purple">
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="←"
+            android:backgroundTint="#00ff0000"
+            android:textSize="20sp"
+            style="?android:attr/borderlessButtonStyle"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+             />
+        <TextView
+            android:id="@+id/courseName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/knu_size"
+            android:text="과목"
+
+            android:padding="13dp"
+            android:textColor="@color/knu_title"
+            android:textSize="@dimen/knu_title_size"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/notice_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="공지 제목"
+        android:paddingTop="13dp"
+        android:paddingLeft="13dp"
+        android:paddingBottom="13dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/border"
+        />
+
+    <TextView
+        android:id="@+id/notice_writer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="작성자"
+        android:paddingTop="10dp"
+        android:paddingLeft="13dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/notice_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="작성일"
+        android:paddingTop="3dp"
+        android:paddingLeft="13dp"
+        android:paddingBottom="15dp"/>
+    <TextView
+        android:id="@+id/notice_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="공지내용공지내용공지내용공지내용공지내용공지내용공지내용공지내용공지내용공지내용공지내용"
+        android:paddingLeft="13dp"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:paddingBottom="30dp"
+        android:background="@drawable/border"
+        />
+
+
+
+
+
+</LinearLayout>
