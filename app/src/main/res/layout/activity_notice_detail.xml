@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoticeDetailActivity"
+    tools:context=".common.NoticeDetailActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -23,7 +23,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
-             />
+            />
         <TextView
             android:id="@+id/courseName"
             android:layout_width="match_parent"

@@ -1,24 +1,25 @@
 package com.example.mobileappproject.common
 
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileappproject.DBManager.DBManager
-import com.example.mobileappproject.DBManager.DB_dc_sub_noti
 import com.example.mobileappproject.R
 import com.example.mobileappproject.databinding.ActivityLmsNoticeBinding
 import com.example.mobileappproject.databinding.LmsNoticeDataBinding
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Date
+
+lateinit var subjcetCode: String
 
 class LmsNoticeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +39,9 @@ class LmsNoticeActivity : AppCompatActivity() {
         val datasWeek = mutableListOf<LmsNotice>()
         val datasMonth = mutableListOf<LmsNotice>()
 
-        val subjcetCode = intent.getStringExtra("course_code")
-
-
+        //val subjcetCode = intent.getStringExtra("course_code")
+        subjcetCode = intent.getStringExtra("course_code").toString()
+        //Log.d("kkang", "$subjcetCode")
         val list = DBManager.getSUBNOTI(subjcetCode!!)
 
         val now = LocalDate.now()
@@ -67,7 +68,6 @@ class LmsNoticeActivity : AppCompatActivity() {
         //--------------
 
 
-
         val adapterDay = LmsNoticeAdapter(datasDay)
         val adapterWeek = LmsNoticeAdapter(datasWeek)
         val adapterMonth = LmsNoticeAdapter(datasMonth)
@@ -75,9 +75,6 @@ class LmsNoticeActivity : AppCompatActivity() {
         recyclerViewDay.adapter=adapterDay
         recyclerViewWeek.adapter=adapterWeek
         recyclerViewMonth.adapter=adapterMonth
-
-
-        
         
 
         binding.foldd.setOnClickListener(MySetOnClickListener(recyclerViewDay))
@@ -138,6 +135,15 @@ class LmsNoticeAdapter(val datas: MutableList<LmsNotice>): RecyclerView.Adapter<
 
         binding.data.setOnClickListener {
             //itemClickListener.OnClick(it, position)
+
+            //Log.d("kkang", "${it}, ${position}")
+            val intent = Intent(holder.itemView?.context, NoticeDetailActivity::class.java)
+            intent.putExtra("notice_title", "${datas[position].title}")
+            intent.putExtra("notice_writer", "${datas[position].writter}")
+            intent.putExtra("notice_mainTxt", "${datas[position].mainTxt}")
+            intent.putExtra("notice_date", "${datas[position].date}")
+            intent.putExtra("course_code", "${subjcetCode}")
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
 
