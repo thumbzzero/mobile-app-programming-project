@@ -1,5 +1,6 @@
 package com.example.mobileappproject.common
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,9 @@ class NoticeDetailActivity : AppCompatActivity() {
         binding.noticeDate.text = "${notice_date}"
 
         binding.backBtn.setOnClickListener {
-            
+            val intent = Intent(this, LmsNoticeActivity::class.java)
+            intent.putExtra("course_code", "${course_code}")
+            startActivity(intent)
         }
 
     }
