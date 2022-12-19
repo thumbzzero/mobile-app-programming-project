@@ -19,7 +19,7 @@ import java.util.*
 
 class CalenderFragment : Fragment() {
     lateinit var binding: FragmentCalenderBinding
-    lateinit var binding2: DBManager
+    //lateinit var binding2: DBManager
     lateinit var studentId: String
     lateinit var stuCourses: ArrayList<DB_dc_std_course_info>
     lateinit var subHw: ArrayList<DB_dc_sub_hwtest>
@@ -31,8 +31,14 @@ class CalenderFragment : Fragment() {
     ): View? {
 
         binding = FragmentCalenderBinding.inflate(inflater,container,false)
-        binding2 = DBManager
-        studentId="2016168188"//studentId=Student.stdInfo?.sid ?:"2016168188"  //todo null일때 데이터처리
+        //binding2 = DBManager
+        //studentId= "2016168188"
+
+
+
+        studentId=Student.stdInfo!!.sid // 학번 동적으로 수정
+        //Log.d("test2","ID 정보 출력2"+studentId)
+
         stuCourses = DBManager.getSTDCOS(studentId)
         var notday:Int=7
         val textCalender = binding.tvDate
@@ -46,11 +52,12 @@ class CalenderFragment : Fragment() {
 
         //val dayList = ArrayList<String>()
         val datas = mutableListOf<String>()
-        val datas2 = mutableListOf<String>()
+        var datas2 = mutableListOf<String>()
         val title = mutableListOf<String>()
         val main_txt = mutableListOf<String>()
         val date = mutableListOf<String>()
         val count = mutableListOf<Int>()
+        val count2 = mutableListOf<Int>()
         val subname = mutableListOf<String>()
 
 
@@ -61,13 +68,13 @@ class CalenderFragment : Fragment() {
         datas.add("목")
         datas.add("금")
         datas.add("토")
-        for (i in 1 until 7) {
+        for (i in 1 until 8) {
             datas2.add("요일")
         }
 
         val cal: Calendar = Calendar.getInstance()
 
-        //cal.set(Calendar.MONTH,5)
+        //cal.set(Calendar.MONTH,10) //셋팅 값의 +1의 달
         cal.set(Calendar.DATE,1)
 
         var month =cal.get(Calendar.MONTH)
@@ -78,7 +85,7 @@ class CalenderFragment : Fragment() {
 
         //val dayNum: Int = mCal.get(Calendar.DAY_OF_WEEK)
         //1일 - 요일 매칭 시키기 위해 공백 add
-        Log.d("test", "날짜 정보 출력" + cal)
+        //Log.d("test", "날짜 정보 출력" + cal)
         for (i in 1 until nWeek) {
             datas.add("")
             datas2.add("")
@@ -94,15 +101,22 @@ class CalenderFragment : Fragment() {
         var datenow = LocalDate.parse("2022-12-12", DateTimeFormatter.ISO_DATE)
         var i:Int=0;
         var j:Int=0;
-
+        var num2:Int=0;
         for( i in 0..(stuCourses.size-1)){
-            Log.d("test","정보 출력"+stuCourses.get(i).code)
+            //Log.d("test","정보 출력"+stuCourses.get(i).code)
             subHw = DBManager.getSUBHWTEST(stuCourses.get(i).code)
             for( j in 0..(subHw.size-1)){
                 if("${year}-${month+1}-32">subHw.get(j).date&&subHw.get(j).date>"${year}-${month+1}-01") {
                     datenow = LocalDate.parse(subHw.get(j).date, DateTimeFormatter.ISO_DATE)
-                    datas2.add(datenow.dayOfMonth+5+nWeek,subHw.get(j).cri)
-                    Log.d("test", ",과목 정보 출력" + subHw.get(j))
+                    num2=datenow.dayOfMonth+nWeek+5;
+                    //datas2.add(datenow.dayOfMonth+5+nWeek,subHw.get(j).cri)
+                    if(datas2[num2]==""){
+
+                        datas2[num2]=subHw.get(j).cri
+                        //Log.d("test2", ",날짜 정보 출력 " + datenow.dayOfMonth+"/"+num2)
+                    }
+
+                    //Log.d("test2", ",과목 정보 출력 ${subHw.get(j)}")
                     title.add(subHw.get(j).cri)
                     main_txt.add(subHw.get(j).cont)
                     date.add(subHw.get(j).date)
@@ -116,36 +130,48 @@ class CalenderFragment : Fragment() {
         for(i in 0..(date.size-1)){
             num=0;
             for(j in 0..(date.size-1)){
-                if(date[j]>date[i]){
+                if(date[j]<date[i]){
                     num=num+1;
                 }
             }
             count[i]=num;
         }
         for(i in 0..(count.size-1)){
-            Log.d("test","count=${count[i]}")
+            //Log.d("test","count=${count[i]}")
         }
         for(i in 0..(count.size-1)){
-            for(j in (i+1)..(count.size-1)){
-                if(count[j]==count[i]){
-                    count[i]=count[i]+1;
+            for(j in (i)..(count.size-1)){
+                if(j>i){
+                    if(count[j]==count[i]){
+                        count[i]=count[i]+1;
+                    }
                 }
             }
         }
 
         for(i in 0..(count.size-1)){
-            Log.d("test","count2=${count[i]}")
+            //Log.d("test","count2=${count[i]}")
         }
         //binding2.getSTDINFO(DBManager)
 
-
-        Log.d("test","3번${DBInfoManager.dbDcStdInfoMap}")
-
+        for(i in 0..(count.size-1)){
+            for(j in 0..(count.size-1)){
+                if(count[j]==i){
+                    count2.add(j)
+                }
+            }
+        }
+        val datas3 = mutableListOf<String>()
+        for(i in 0..(datas2.size-1)){
+            datas3.add(datas2[i])
+        }
+        //Log.d("test","3번${DBInfoManager.dbDcStdInfoMap}")
 
         binding.calenderView.layoutManager = GridLayoutManager(activity,7)
-        binding.calenderView.adapter = CalenderAdapter(datas,datas2)
+        binding.calenderView.adapter = CalenderAdapter(datas,datas3)
+
         binding.calenderView2.layoutManager=GridLayoutManager(activity,1)
-        binding.calenderView2.adapter = CalenderAdapter2(title,main_txt,date,count,subname)
+        binding.calenderView2.adapter = CalenderAdapter2(title,main_txt,date,count2,subname)
         //binding2.calenderView.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
 
 

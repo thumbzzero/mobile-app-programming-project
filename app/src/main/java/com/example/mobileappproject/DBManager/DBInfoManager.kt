@@ -4,6 +4,7 @@ import android.util.Log
 import java.sql.ResultSet
 import java.sql.Statement
 
+
 data class DB_dc_std_info(
     var id: String = "", //접속 id         STD_ID
     var pw: String = "", //접속 pw         STD_PW
@@ -11,6 +12,7 @@ data class DB_dc_std_info(
     var dep: String = "", //학생 학부        STD_DEP
     var sid: String = "" //학생 학번         STD_SID---
 )
+
 
 data class DB_dc_std_course_info(
     var sid: String = "", //학생 학번        STD_SID---

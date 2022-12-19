@@ -15,14 +15,14 @@ class CalenderAdapter2 (val datas: MutableList<String>,val datas2: MutableList<S
         CalenderViewHolder(ItemCalendarGridview2Binding.inflate(LayoutInflater.from(parent.context),parent,false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("test","onBindViewHolder:$position")
+        //Log.d("test","onBindViewHolder2:$position")
         val binding = (holder as CalenderViewHolder).binding
         binding.title.text = datas[datas4[position]]
         binding.mainTxt.text=datas2[datas4[position]]
         binding.date.text=datas3[datas4[position]]
         binding.title2.text=datas5[datas4[position]]
         binding.itemRoot2.setOnClickListener{
-            Log.d("test","onBindViewHolder:$position")
+            //Log.d("test","onBindViewHolder2:$position")
         }
     }
 

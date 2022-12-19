@@ -16,23 +16,26 @@ class CalenderAdapter(val datas: MutableList<String>,val datas2: MutableList<Str
         CalenderViewHolder(ItemCalendarGridviewBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        //Log.d("test","onBindViewHolder:$position")
+
         val a:Int=1
         val binding = (holder as CalenderViewHolder).binding
         binding.tvItem.text = datas[position]
+
         if(datas2[position]!=""){
+
             if(datas2[position]=="요일"){
                 binding.tvItem2.setHeight(0)
             }else{
+                //Log.d("test2","onBindViewHolder:$position")
                 binding.tvItem2.text =datas2[position]
                 binding.tvItem2.visibility=View.VISIBLE
             }
         }
 
-
         binding.itemRoot.setOnClickListener{
-            Log.d("test","onBindViewHolder:$position")
+            //Log.d("test","onBindViewHolder:$position")
         }
+
     }
 
 
