@@ -46,8 +46,7 @@ class LmsLectureMaterialActivity : AppCompatActivity() {
 
         binding.recyclerViewLectureMaterial.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewLectureMaterial.adapter = LmsLectureMaterialAdapter(datas)
-        binding.recyclerViewLectureMaterial.addItemDecoration(DividerItemDecoration(this,
-        LinearLayoutManager.VERTICAL))
+        //binding.recyclerViewLectureMaterial.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
     }
 }
 

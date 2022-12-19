@@ -36,8 +36,7 @@ class MessageFragment : Fragment() {
 
         binding.recyclerViewMessage.adapter = MessageAdapter(datas)
         binding.recyclerViewMessage.layoutManager = LinearLayoutManager(inflater.context)
-        binding.recyclerViewMessage.addItemDecoration(DividerItemDecoration(inflater.context,
-            LinearLayoutManager.VERTICAL))
+        //binding.recyclerViewMessage.addItemDecoration(DividerItemDecoration(inflater.context,LinearLayoutManager.VERTICAL))
         return binding.root
     }
 }

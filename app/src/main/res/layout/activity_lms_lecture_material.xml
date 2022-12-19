@@ -31,7 +31,7 @@
         android:id="@+id/itemRoot_LectureMaterial"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#eee"
+        android:background="@color/white"
         android:padding="10dp">
 
         <androidx.recyclerview.widget.RecyclerView

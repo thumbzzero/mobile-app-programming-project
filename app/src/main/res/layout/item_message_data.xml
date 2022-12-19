@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:id="@+id/message_item_root"
-    android:background="@color/white"
+    android:background="@drawable/round_rectangle"
     android:padding="10dp">
     <LinearLayout
         android:layout_weight="3"
