@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/lecture_material_item_image"
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:src="@drawable/notice_star_on">
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/circle">
     </ImageView>
 
     <LinearLayout
