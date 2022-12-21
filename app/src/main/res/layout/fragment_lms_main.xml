@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".common.LmsMainFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/knu_size"
+        android:text="과목"
+        android:background="@color/knu_purple"
+        android:padding="13dp"
+        android:textColor="@color/knu_title"
+        android:textSize="@dimen/knu_title_size"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2022년 2학기"
+        android:paddingTop="13dp"
+        android:paddingLeft="13dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/courseLayout1"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName1"
+            style="@style/dashboard_box"
+            android:text="모바일앱프로그래밍1" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn1"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/courseLayout2"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName2"
+            style="@style/dashboard_box"
+            android:text="데이터통신" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn2"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/courseLayout3"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName3"
+            style="@style/dashboard_box"
+            android:text="데이터베이스" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn3"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/courseLayout4"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName4"
+            style="@style/dashboard_box"
+            android:text="종합설계프로젝트1" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn4"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/courseLayout5"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName5"
+            style="@style/dashboard_box"
+            android:text="소프트웨어설계" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn5"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/courseLayout6"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName6"
+            style="@style/dashboard_box"
+            android:text="알고리즘1" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn6"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/courseLayout7"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName7"
+            style="@style/dashboard_box"
+            android:text="알고리즘1" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn7"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/courseLayout8"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName8"
+            style="@style/dashboard_box"
+            android:text="알고리즘1" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn8"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/courseLayout9"
+        style="@style/dashboard_course_layout"
+        android:visibility="invisible">
+        <TextView
+            android:id="@+id/courseName9"
+            style="@style/dashboard_box"
+            android:text="알고리즘1" />
+        <View
+            style="@style/dashboard_course_view" />
+        <Button
+            android:id="@+id/goBtn9"
+            style="@style/dashboard_course_btn" />
+    </LinearLayout>
+
+</LinearLayout>

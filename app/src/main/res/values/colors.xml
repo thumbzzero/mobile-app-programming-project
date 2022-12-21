@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="knu_color">#ACACE6</color>
+    <color name="knu_title">#ffffff</color>
+
+    <color name="knu_red">#E60000</color>
+    <color name="knu_gray">#797977</color>
+    <color name="knu_purple">#ACACE6</color>
+    <color name="knu_mint">#8DD9C3</color>
+    <color name="knu_lightgray">#CCCCCC</color>
+    <color name="knu_brown">#BF7C26</color>
+    <color name="knu_beige">#B8C395</color>
 </resources>
